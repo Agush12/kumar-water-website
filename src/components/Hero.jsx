@@ -52,8 +52,7 @@ export default function Hero() {
           src={heroBg}
           alt=""
           className="w-full h-full object-cover"
-          style={{ objectPosition: 'center 60%' }}
-          style={{ display: 'block' }}
+          style={{ objectPosition: 'center 60%', display: 'block' }}
           fetchpriority="high"
         />
       </div>
@@ -140,7 +139,7 @@ export default function Hero() {
             duration={800}
             className="w-full xs:w-auto px-7 py-3.5 bg-white text-brand-700 font-bold rounded-xl shadow-xl shadow-white/20 hover:-translate-y-1 hover:shadow-white/40 transition-all duration-300 text-sm sm:text-base cursor-pointer text-center"
           >
-            Get a Free Quote
+            Get a Quote
           </Link>
           <Link
             to="products"

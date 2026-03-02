@@ -165,6 +165,10 @@ function ProductCard({ product, index, inView }) {
   const [hovered, setHovered] = useState(false);
   const Icon = product.icon;
 
+  const scrollToContact = () => {
+    document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
+  };
+
   return (
     <div
       className={`group relative bg-white rounded-2xl overflow-hidden shadow-md shadow-brand-500/5 border border-gray-100 transition-all duration-500 hover:-translate-y-2 hover:shadow-xl cursor-pointer flex flex-col ${
@@ -173,6 +177,7 @@ function ProductCard({ product, index, inView }) {
       style={{ transitionDelay: `${index * 80}ms` }}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
+      onClick={scrollToContact}
     >
       {/* Top accent line */}
       <div
@@ -255,7 +260,7 @@ function ProductCard({ product, index, inView }) {
             border: `2px solid ${product.color}`,
             boxShadow: hovered ? `0 6px 20px ${product.color}30` : 'none',
           }}
-          onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
+          type="button"
         >
           Get Quote
         </button>

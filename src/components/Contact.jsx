@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useInView } from 'react-intersection-observer';
 import {
   MapPin, Phone, Mail, Send, CheckCircle2,
@@ -43,15 +43,58 @@ export default function Contact() {
   const [loading, setLoading] = useState(false);
   const { ref, inView } = useInView({ threshold: 0.1, triggerOnce: true });
 
+  // Load previous submission state from localStorage (per browser)
+  useEffect(() => {
+    try {
+      const stored = window.localStorage.getItem('kpws_contact_state');
+      if (stored) {
+        const parsed = JSON.parse(stored);
+        if (parsed?.submitted) {
+          setSubmitted(true);
+        }
+      }
+    } catch {
+      // ignore if localStorage blocked
+    }
+  }, []);
+
   const handleChange = (e) => setForm((prev) => ({ ...prev, [e.target.name]: e.target.value }));
 
   const handleSubmit = (e) => {
     e.preventDefault();
     setLoading(true);
-    setTimeout(() => {
-      setLoading(false);
-      setSubmitted(true);
-    }, 1500);
+
+    const whatsappNumber = '916397335219'; // Ankur Sharma
+
+    const lines = [
+      'New enquiry from Kumar Pure Water website',
+      '',
+      `Name: ${form.name || '-'}`,
+      `Phone: ${form.phone || '-'}`,
+      `Email: ${form.email || '-'}`,
+      `Company: ${form.company || '-'}`,
+      `Service needed: ${form.service || '-'}`,
+      '',
+      'Message / Requirements:',
+      form.message || '-',
+    ];
+
+    const text = encodeURIComponent(lines.join('\n'));
+    const url = `https://wa.me/${whatsappNumber}?text=${text}`;
+
+    window.open(url, '_blank');
+
+    try {
+      window.localStorage.setItem(
+        'kpws_contact_state',
+        JSON.stringify({ submitted: true, lastName: form.name, lastPhone: form.phone }),
+      );
+    } catch {
+      // ignore if localStorage blocked
+    }
+
+    setLoading(false);
+    setSubmitted(true);
   };
 
   return (
@@ -90,7 +133,15 @@ export default function Contact() {
                   </p>
                   <button
                     className="mt-6 px-5 py-2.5 bg-brand-600 text-white rounded-xl font-semibold text-sm hover:bg-brand-700 transition-colors"
-                    onClick={() => { setSubmitted(false); setForm({ name: '', email: '', phone: '', company: '', service: '', message: '' }); }}
+                    onClick={() => {
+                      setSubmitted(false);
+                      setForm({ name: '', email: '', phone: '', company: '', service: '', message: '' });
+                      try {
+                        window.localStorage.removeItem('kpws_contact_state');
+                      } catch {
+                        // ignore
+                      }
+                    }}
                   >
                     Send Another
                   </button>
