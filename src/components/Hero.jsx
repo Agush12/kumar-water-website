@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-scroll';
 import { ChevronDown, Award, Shield, Zap } from 'lucide-react';
 import logo from '../assets/logo.png';
+import heroBg from '../assets/hero-bg.png';
 
 const badges = [
   { icon: Award, label: 'Since 1999' },
@@ -33,7 +34,7 @@ export default function Hero() {
       if (!heroRef.current) return;
       const scrollY = window.scrollY;
       const bg = heroRef.current.querySelector('.hero-bg');
-      if (bg) bg.style.transform = `scale(1.15) translateY(${scrollY * 0.3}px)`;
+      if (bg) bg.style.transform = `scale(1.05) translateY(${scrollY * 0.15}px)`;
     };
     window.addEventListener('scroll', handleParallax, { passive: true });
     return () => window.removeEventListener('scroll', handleParallax);
@@ -45,24 +46,30 @@ export default function Hero() {
       ref={heroRef}
       className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden"
     >
-      {/* Parallax Background */}
-      <div
-        className="hero-bg absolute inset-0 scale-110 transition-transform duration-100"
-        style={{
-          background: 'linear-gradient(135deg, #1E40AF 0%, #3B82F6 45%, #60A5FA 100%)',
-        }}
-      >
-        <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-white/10 rounded-full blur-3xl animate-pulse-slow" />
-        <div className="absolute bottom-1/4 right-1/4 w-80 h-80 bg-accent-400/10 rounded-full blur-3xl animate-pulse-slow delay-500" />
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[50rem] h-[50rem] bg-brand-700/30 rounded-full blur-3xl" />
+      {/* Parallax Background — real photo */}
+      <div className="hero-bg absolute inset-0 scale-100 transition-transform duration-100">
+        <img
+          src={heroBg}
+          alt=""
+          className="w-full h-full object-cover"
+          style={{ objectPosition: 'center 60%' }}
+          style={{ display: 'block' }}
+          fetchpriority="high"
+        />
       </div>
+
+      {/* Dark overlay for text legibility — stronger at top & bottom */}
+      <div className="absolute inset-0 bg-gradient-to-b from-black/55 via-black/35 to-black/65" />
+
+      {/* Subtle blue tint to keep brand feel */}
+      <div className="absolute inset-0 bg-brand-900/25" />
 
       {/* Bubbles */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         {bubbleData.map((b, i) => (
           <div
             key={i}
-            className="absolute rounded-full border border-white/15 bg-white/5"
+            className="absolute rounded-full border border-white/10 bg-white/5"
             style={{
               width: b.size,
               height: b.size,
@@ -77,9 +84,6 @@ export default function Hero() {
           />
         ))}
       </div>
-
-      {/* Overlay */}
-      <div className="absolute inset-0 bg-gradient-to-b from-brand-800/10 via-transparent to-brand-900/30" />
 
       {/* Main Content */}
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center pt-24 pb-16">
@@ -100,7 +104,7 @@ export default function Hero() {
           className={`text-3xl xs:text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black text-white leading-tight mb-4 md:mb-6 transition-all duration-700 delay-150 ${
             loaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
           }`}
-          style={{ textShadow: '0 4px 24px rgba(0,0,0,0.2)' }}
+          style={{ textShadow: '0 2px 20px rgba(0,0,0,0.6), 0 4px 40px rgba(0,0,0,0.4)' }}
         >
           Northern India&apos;s{' '}
           <span className="bg-gradient-to-r from-accent-300 to-white bg-clip-text text-transparent">

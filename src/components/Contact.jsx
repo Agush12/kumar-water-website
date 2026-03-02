@@ -10,9 +10,9 @@ const contactInfo = [
   {
     icon: MapPin,
     title: 'Our Address',
-    lines: ['109/1, Sector 15B, Awas Vikas Colony,', 'Near Karkunj, Agra, Uttar Pradesh'],
+    lines: ['109/1, Karkunj Rd, Sector 15-B,', 'Avas Vikas Colony, Sikandra,', 'Agra, Uttar Pradesh – 282007'],
     color: '#2563EB',
-    href: 'https://maps.google.com/?q=Awas+Vikas+Colony+Agra',
+    href: 'https://maps.google.com/?q=Kumar+Pure+Water+Solution+Pvt+Ltd,+109/1,+Karkunj+Rd,+Sector+15-B,+Kar+Kunj+Chauraha,+Avas+Vikas+Colony,+Sikandra,+Agra,+Uttar+Pradesh+282007',
   },
   {
     icon: Phone,
@@ -215,7 +215,7 @@ export default function Contact() {
             {/* Map */}
             <div className="rounded-2xl overflow-hidden border border-brand-100 shadow-md">
               <iframe title="Kumar Pure Water Solution Location"
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3549.5!2d78.0081!3d27.1767!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMjfCsDEwJzM2LjEiTiA3OMKwMDAnMjkuMiJF!5e0!3m2!1sen!2sin!4v1000000000!5m2!1sen!2sin"
+                src="https://maps.google.com/maps?q=Kumar+Pure+Water+Solution+Pvt+Ltd+109%2F1+Karkunj+Rd+Sector+15-B+Kar+Kunj+Chauraha+Avas+Vikas+Colony+Sikandra+Agra+Uttar+Pradesh+282007&output=embed"
                 width="100%" height="180" style={{ border: 0 }} allowFullScreen loading="lazy" referrerPolicy="no-referrer-when-downgrade" />
             </div>
           </div>

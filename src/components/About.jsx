@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import { useInView } from 'react-intersection-observer';
 import { CheckCircle2 } from 'lucide-react';
 import logo from '../assets/logo.png';
+import aboutVisual from '../assets/about-visual.png';
 
 const stats = [
   { value: 25, suffix: '+', label: 'Years Experience', color: 'from-brand-600 to-brand-400' },
@@ -82,20 +83,11 @@ export default function About() {
             }`}
           >
             <div className="relative rounded-3xl overflow-hidden shadow-2xl shadow-brand-500/10">
-              <div className="w-full h-72 sm:h-80 md:h-96 bg-gradient-to-br from-brand-600 via-brand-500 to-brand-400 flex items-center justify-center relative">
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <div className="text-center text-white">
-                    <div className="w-28 h-28 mx-auto mb-4 bg-white rounded-2xl flex items-center justify-center animate-float shadow-2xl p-2">
-                      <img src={logo} alt="Kumar Pure Water Logo" className="w-full h-full object-contain" />
-                    </div>
-                    <p className="text-xl font-bold text-white leading-snug">Kumar Pure Water<br/>Pvt. Ltd.</p>
-                    <p className="text-white/70 text-sm mt-1">Est. 1999 · Agra, U.P.</p>
-                  </div>
-                </div>
-                <div className="absolute top-4 right-4 w-16 h-16 border-2 border-white/15 rounded-full animate-spin-slow" />
-                <div className="absolute bottom-6 left-6 w-10 h-10 border border-white/10 rounded-full" />
-                <div className="absolute top-1/2 left-4 w-3 h-3 bg-accent-300/60 rounded-full animate-ping" />
-              </div>
+              <img
+                src={aboutVisual}
+                alt="Kumar Pure Water Solution"
+                className="w-full h-72 sm:h-80 md:h-96 object-cover object-center"
+              />
             </div>
 
             <div className="absolute -bottom-5 -right-4 sm:right-4 bg-white rounded-2xl px-5 py-4 shadow-xl border border-gray-100 z-10">
@@ -103,7 +95,7 @@ export default function About() {
               <p className="text-xs text-slate-500 font-medium mt-0.5">Years of Excellence</p>
             </div>
             <div className="absolute -top-5 -left-4 sm:left-4 bg-gradient-to-br from-brand-500 to-brand-600 rounded-2xl px-5 py-4 shadow-xl z-10">
-              <p className="text-3xl font-black text-white">10+</p>
+              <p className="text-3xl font-black text-white">12+</p>
               <p className="text-xs text-brand-100 font-medium mt-0.5">States Covered</p>
             </div>
           </div>

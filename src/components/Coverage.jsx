@@ -3,66 +3,58 @@ import { useInView } from 'react-intersection-observer';
 import { MapPin } from 'lucide-react';
 import logo from '../assets/logo.png';
 
+// Coordinate mapping: viewBox "0 0 420 470"
+// x = (lon - 68) * 14.24,  y = (37 - lat) * 15.93
 const states = [
-  { name: 'Jammu & Kashmir', abbr: 'J&K',  x: 102, y: 75,  major: false },
-  { name: 'Punjab',           abbr: 'PB',   x: 108, y: 103, major: false },
-  { name: 'Himachal Pradesh', abbr: 'HP',   x: 126, y: 96,  major: false },
-  { name: 'Uttarakhand',      abbr: 'UK',   x: 149, y: 117, major: false },
-  { name: 'Haryana',          abbr: 'HR',   x: 114, y: 124, major: false },
-  { name: 'Delhi',            abbr: 'DL',   x: 128, y: 135, major: true  },
-  { name: 'Uttar Pradesh',    abbr: 'UP',   x: 171, y: 161, major: true  },
-  { name: 'Rajasthan',        abbr: 'RJ',   x: 90,  y: 159, major: false },
-  { name: 'Madhya Pradesh',   abbr: 'MP',   x: 130, y: 209, major: false },
-  { name: 'Gujarat',          abbr: 'GJ',   x: 61,  y: 220, major: false },
-  { name: 'Bihar',            abbr: 'BR',   x: 221, y: 177, major: false },
-  { name: 'Jharkhand',        abbr: 'JH',   x: 223, y: 209, major: false },
+  { name: 'Jammu & Kashmir', abbr: 'J&K',  x: 97,  y: 46,  major: false },
+  { name: 'Punjab',           abbr: 'PB',   x: 120, y: 100, major: false },
+  { name: 'Himachal Pradesh', abbr: 'HP',   x: 131, y: 94,  major: false },
+  { name: 'Uttarakhand',      abbr: 'UK',   x: 143, y: 107, major: false },
+  { name: 'Haryana',          abbr: 'HR',   x: 118, y: 120, major: false },
+  { name: 'Delhi',            abbr: 'DL',   x: 130, y: 134, major: true  },
+  { name: 'Uttar Pradesh',    abbr: 'UP',   x: 184, y: 162, major: true  },
+  { name: 'Rajasthan',        abbr: 'RJ',   x: 86,  y: 175, major: false },
+  { name: 'Madhya Pradesh',   abbr: 'MP',   x: 134, y: 218, major: false },
+  { name: 'Gujarat',          abbr: 'GJ',   x: 66,  y: 220, major: false },
+  { name: 'Bihar',            abbr: 'BR',   x: 244, y: 182, major: false },
+  { name: 'Jharkhand',        abbr: 'JH',   x: 246, y: 217, major: false },
 ];
 
-const HQ_X = 137;
+const HQ_X = 142;
 const HQ_Y = 156;
 
+// Traced from real lat/lon coordinates — clockwise from J&K north
 const INDIA_PATH = `
-  M 90,20
-  L 110,12 L 132,10 L 149,20 L 158,30
-  L 162,45 L 166,60 L 168,78
-  L 171,90 L 175,100 L 178,112
-  L 182,122 L 185,130 L 190,138
-  L 200,140 L 220,140 L 249,140
-  L 270,132 L 295,126 L 318,120
-  L 354,122
-  L 348,140 L 338,155 L 325,168
-  L 310,178 L 295,185 L 278,190
-  L 264,200 L 256,212
-  L 252,225 L 248,238
-  L 238,252 L 226,265
-  L 215,278 L 205,292
-  L 194,306 L 183,320
-  L 172,334 L 162,348
-  L 154,362 L 148,376
-  L 144,390 L 142,405
-  L 140,418
-  L 135,408 L 128,394
-  L 120,378 L 112,362
-  L 104,345 L 96,328
-  L 88,310 L 80,292
-  L 74,275 L 70,258
-  L 72,242 L 72,228
-  L 68,218 L 62,210
-  L 50,208 L 38,210
-  L 28,208 L 22,198
-  L 20,185
-  L 26,168 L 32,152
-  L 38,136 L 43,118
-  L 48,100 L 54,82
-  L 60,68 L 68,55
-  L 74,42 L 80,30
+  M 100,0
+  L 128,26 L 143,32 L 157,35
+  L 171,48 L 228,80
+  L 271,143 L 285,151 L 299,151
+  L 328,151 L 356,159
+  L 413,136 L 420,155
+  L 399,207 L 370,231 L 363,239
+  L 342,231 L 328,227 L 313,231 L 306,239
+  L 285,239
+  L 264,263 L 242,279
+  L 228,303 L 213,311
+  L 185,334 L 171,382
+  L 164,430 L 136,460
+  L 121,454 L 114,438
+  L 96,384 L 82,342
+  L 71,303 L 68,271 L 64,255
+  L 57,248 L 43,248 L 28,248 L 14,248 L 7,247
+  L 7,235 L 14,223 L 28,215
+  L 3,207 L 0,199
+  L 7,191 L 14,175
+  L 28,151 L 43,143 L 57,127
+  L 85,96 L 92,72 L 92,56
+  L 100,48 L 100,0
   Z
 `;
 
 function IndiaMapSVG({ activeState, onHover }) {
   return (
     <div className="relative w-full max-w-sm mx-auto select-none">
-      <svg viewBox="0 0 380 440" className="w-full" style={{ filter: 'drop-shadow(0 4px 20px rgba(37,99,235,0.15))' }}>
+      <svg viewBox="0 0 420 470" className="w-full" style={{ filter: 'drop-shadow(0 4px 20px rgba(37,99,235,0.15))' }}>
         {/* India body */}
         <path d={INDIA_PATH} fill="#EFF6FF" stroke="#93C5FD" strokeWidth="1.5" strokeLinejoin="round" />
         <path d={INDIA_PATH} fill="none" stroke="#BFDBFE" strokeWidth="4" strokeLinejoin="round" />
@@ -114,7 +106,7 @@ function IndiaMapSVG({ activeState, onHover }) {
           const s = states.find((st) => st.name === activeState);
           if (!s) return null;
           const tw = s.name.length * 5.5 + 14;
-          const tx = Math.min(Math.max(s.x - tw / 2, 4), 380 - tw - 4);
+          const tx = Math.min(Math.max(s.x - tw / 2, 4), 420 - tw - 4);
           const ty = s.y - 32;
           return (
             <g>
