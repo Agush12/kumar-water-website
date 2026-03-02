@@ -12,8 +12,8 @@
 
   body {
     font-family: 'Poppins', sans-serif;
-    background-color: #F5F7FA;
-    color: #1a202c;
+    background-color: #FFFFFF;
+    color: #1e293b;
     overflow-x: hidden;
   }
 
@@ -24,23 +24,23 @@
 
 @layer components {
   .btn-primary {
-    @apply px-6 py-3 bg-gradient-to-r from-teal-500 to-teal-600 text-white font-semibold rounded-xl shadow-lg hover:shadow-teal-500/40 hover:-translate-y-1 transition-all duration-300 text-sm md:text-base;
+    @apply px-6 py-3 bg-gradient-to-r from-brand-600 to-brand-500 text-white font-semibold rounded-xl shadow-lg hover:shadow-brand-500/30 hover:-translate-y-1 transition-all duration-300 text-sm md:text-base;
+  }
+
+  .btn-accent {
+    @apply px-6 py-3 bg-gradient-to-r from-accent-500 to-accent-400 text-white font-semibold rounded-xl shadow-lg hover:shadow-accent-500/30 hover:-translate-y-1 transition-all duration-300 text-sm md:text-base;
   }
 
   .btn-outline {
-    @apply px-6 py-3 border-2 border-white text-white font-semibold rounded-xl hover:bg-white hover:text-navy-900 transition-all duration-300 text-sm md:text-base;
+    @apply px-6 py-3 border-2 border-brand-600 text-brand-600 font-semibold rounded-xl hover:bg-brand-600 hover:text-white transition-all duration-300 text-sm md:text-base;
   }
 
   .section-title {
-    @apply text-2xl md:text-3xl lg:text-4xl font-bold text-navy-900 leading-tight;
+    @apply text-2xl md:text-3xl lg:text-4xl font-bold text-brand-950 leading-tight;
   }
 
   .section-subtitle {
-    @apply text-base md:text-lg text-gray-500 mt-3 leading-relaxed;
-  }
-
-  .glass-card {
-    @apply bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl;
+    @apply text-base md:text-lg text-slate-500 mt-3 leading-relaxed;
   }
 
   .card-hover {
@@ -50,26 +50,19 @@
 
 @layer utilities {
   .text-gradient {
-    @apply bg-gradient-to-r from-teal-500 to-blue-400 bg-clip-text text-transparent;
+    @apply bg-gradient-to-r from-brand-600 to-accent-500 bg-clip-text text-transparent;
   }
 
-  .bg-navy-gradient {
-    background: linear-gradient(135deg, #072538 0%, #0B3C5D 60%, #134077 100%);
+  .bg-hero-gradient {
+    background: linear-gradient(135deg, #1E40AF 0%, #3B82F6 50%, #60A5FA 100%);
   }
 
-  .wave-divider {
-    position: relative;
+  .bg-section-light {
+    background: #F0F7FF;
   }
 
-  .wave-divider::after {
-    content: '';
-    position: absolute;
-    bottom: -1px;
-    left: 0;
-    right: 0;
-    height: 4rem;
-    background: inherit;
-    clip-path: ellipse(55% 100% at 50% 100%);
+  .bg-section-white {
+    background: #FFFFFF;
   }
 
   .hide-scrollbar::-webkit-scrollbar {
@@ -82,42 +75,19 @@
   }
 }
 
-/* Custom scrollbar */
+/* Scrollbar */
 ::-webkit-scrollbar {
-  width: 6px;
+  width: 5px;
 }
 ::-webkit-scrollbar-track {
-  background: #F5F7FA;
+  background: #F0F7FF;
 }
 ::-webkit-scrollbar-thumb {
-  background: #0B3C5D;
+  background: #3B82F6;
   border-radius: 3px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #00C9A7;
-}
-
-/* Bubble animation container */
-.bubble {
-  position: absolute;
-  border-radius: 50%;
-  background: rgba(0, 201, 167, 0.15);
-  animation: bubble 8s ease-in-out infinite;
-}
-
-/* Ripple effect */
-.ripple-container {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  overflow: hidden;
-  height: 5rem;
-}
-
-/* Glow border animation */
-.glow-border {
-  animation: glow 2s ease-in-out infinite alternate;
+  background: #2563EB;
 }
 
 /* Stagger animation delays */

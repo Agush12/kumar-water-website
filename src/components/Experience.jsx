@@ -10,91 +10,78 @@ const sectors = [
     icon: Shield,
     title: 'Government & Defence',
     clients: ['U.P. Police', 'Uttarakhand Police', 'Indian Air Force', 'Army Units'],
-    color: '#00C9A7',
-    glow: 'rgba(0,201,167,0.3)',
+    color: '#2563EB',
   },
   {
     icon: Stethoscope,
     title: 'Hospitals & Medical',
     clients: ['Multi-specialty Hospitals', 'Clinics & Labs', 'Pharmaceutical Plants', 'Blood Banks'],
-    color: '#3b82f6',
-    glow: 'rgba(59,130,246,0.3)',
+    color: '#06B6D4',
   },
   {
     icon: GraduationCap,
     title: 'Education',
     clients: ['Schools', 'Colleges', 'Universities', 'Research Institutes'],
-    color: '#8b5cf6',
-    glow: 'rgba(139,92,246,0.3)',
+    color: '#8B5CF6',
   },
   {
     icon: Hotel,
     title: 'Hospitality',
     clients: ['Hotels', 'Restaurants', 'Resorts', 'Banquet Halls'],
-    color: '#f59e0b',
-    glow: 'rgba(245,158,11,0.3)',
+    color: '#F59E0B',
   },
   {
     icon: Train,
     title: 'Railways & Transport',
     clients: ['Railway Stations', 'Bus Terminals', 'Roadways', 'Transit Hubs'],
-    color: '#ef4444',
-    glow: 'rgba(239,68,68,0.3)',
+    color: '#EF4444',
   },
   {
     icon: Newspaper,
     title: 'Media & Corporate',
     clients: ['Amar Ujala Group', 'Corporate Offices', 'IT Parks', 'Business Centers'],
-    color: '#06b6d4',
-    glow: 'rgba(6,182,212,0.3)',
+    color: '#10B981',
   },
   {
     icon: Factory,
     title: 'Industries',
     clients: ['Manufacturing Plants', 'Textile Mills', 'Food Processing', 'Chemical Plants'],
-    color: '#10b981',
-    glow: 'rgba(16,185,129,0.3)',
+    color: '#F97316',
   },
   {
     icon: Building2,
     title: 'Real Estate',
     clients: ['Housing Societies', 'Residential Complexes', 'Townships', 'Commercial Plazas'],
-    color: '#f97316',
-    glow: 'rgba(249,115,22,0.3)',
+    color: '#EC4899',
   },
 ];
 
-function SectorCard({ icon: Icon, title, clients, color, glow, index, inView }) {
+function SectorCard({ icon: Icon, title, clients, color, index, inView }) {
   return (
     <div
-      className={`flex-shrink-0 w-64 sm:w-72 rounded-2xl p-6 border transition-all duration-500 hover:-translate-y-2 cursor-default group ${
+      className={`flex-shrink-0 w-64 sm:w-72 rounded-2xl p-6 bg-white border border-gray-100 shadow-md transition-all duration-500 hover:-translate-y-2 hover:shadow-xl cursor-default group ${
         inView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
       }`}
-      style={{
-        background: 'rgba(11, 60, 93, 0.6)',
-        backdropFilter: 'blur(12px)',
-        borderColor: `${color}40`,
-        transitionDelay: `${index * 80}ms`,
-      }}
+      style={{ transitionDelay: `${index * 80}ms` }}
       onMouseEnter={(e) => {
-        e.currentTarget.style.boxShadow = `0 0 30px ${glow}, 0 0 60px ${glow}50`;
         e.currentTarget.style.borderColor = color;
+        e.currentTarget.style.boxShadow = `0 12px 40px ${color}15`;
       }}
       onMouseLeave={(e) => {
-        e.currentTarget.style.boxShadow = 'none';
-        e.currentTarget.style.borderColor = `${color}40`;
+        e.currentTarget.style.borderColor = '#f3f4f6';
+        e.currentTarget.style.boxShadow = '';
       }}
     >
       <div
         className="w-12 h-12 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300"
-        style={{ background: `${color}20`, border: `1.5px solid ${color}60` }}
+        style={{ background: `${color}12`, border: `1.5px solid ${color}30` }}
       >
         <Icon className="w-6 h-6" style={{ color }} />
       </div>
-      <h3 className="text-white font-bold text-base mb-3">{title}</h3>
+      <h3 className="text-brand-950 font-bold text-base mb-3">{title}</h3>
       <ul className="space-y-1.5">
         {clients.map((c) => (
-          <li key={c} className="flex items-center gap-2 text-white/60 text-sm">
+          <li key={c} className="flex items-center gap-2 text-slate-500 text-sm">
             <span className="w-1.5 h-1.5 rounded-full flex-shrink-0" style={{ background: color }} />
             {c}
           </li>
@@ -114,68 +101,57 @@ export default function Experience() {
   };
 
   return (
-    <section id="experience" className="py-16 md:py-24 bg-navy-gradient relative overflow-hidden">
-      {/* Background decorations */}
-      <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[60rem] h-[60rem] rounded-full"
-          style={{ background: 'radial-gradient(circle, rgba(0,201,167,0.05) 0%, transparent 70%)' }}
-        />
-      </div>
+    <section id="experience" className="py-16 md:py-24 bg-[#F0F7FF] relative overflow-hidden">
+      <div className="absolute top-0 right-0 w-80 h-80 bg-brand-200/30 rounded-full blur-3xl" />
+      <div className="absolute bottom-0 left-0 w-72 h-72 bg-accent-400/10 rounded-full blur-3xl" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div ref={ref} className="text-center mb-10 md:mb-14">
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 bg-teal-500/20 border border-teal-500/30 rounded-full text-teal-400 text-xs sm:text-sm font-semibold mb-4 tracking-wide uppercase">
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 bg-brand-50 border border-brand-200 rounded-full text-brand-600 text-xs sm:text-sm font-semibold mb-4 tracking-wide uppercase">
             <Droplets className="w-4 h-4" />
             Industry Experience
           </div>
-          <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-white leading-tight">
+          <h2 className="section-title">
             Trusted Across{' '}
-            <span className="bg-gradient-to-r from-teal-400 to-cyan-300 bg-clip-text text-transparent">
-              Every Sector
-            </span>
+            <span className="text-gradient">Every Sector</span>
           </h2>
-          <p className="text-white/50 mt-3 text-sm sm:text-base max-w-xl mx-auto">
+          <p className="section-subtitle max-w-xl mx-auto">
             From government defence units to five-star hotels — our installations speak for themselves.
           </p>
         </div>
 
         {/* Horizontal Scroll Cards */}
         <div className="relative">
-          {/* Scroll Buttons */}
           <button
             onClick={() => scroll(-1)}
-            className="absolute -left-3 sm:-left-5 top-1/2 -translate-y-1/2 z-10 w-10 h-10 bg-navy-900/80 border border-white/20 rounded-full flex items-center justify-center text-white hover:bg-teal-500 hover:border-teal-500 transition-all duration-300 shadow-xl"
+            className="absolute -left-3 sm:-left-5 top-1/2 -translate-y-1/2 z-10 w-10 h-10 bg-white border border-brand-200 rounded-full flex items-center justify-center text-brand-600 hover:bg-brand-600 hover:text-white hover:border-brand-600 transition-all duration-300 shadow-lg"
             aria-label="Scroll left"
           >
             <ChevronLeft className="w-5 h-5" />
           </button>
           <button
             onClick={() => scroll(1)}
-            className="absolute -right-3 sm:-right-5 top-1/2 -translate-y-1/2 z-10 w-10 h-10 bg-navy-900/80 border border-white/20 rounded-full flex items-center justify-center text-white hover:bg-teal-500 hover:border-teal-500 transition-all duration-300 shadow-xl"
+            className="absolute -right-3 sm:-right-5 top-1/2 -translate-y-1/2 z-10 w-10 h-10 bg-white border border-brand-200 rounded-full flex items-center justify-center text-brand-600 hover:bg-brand-600 hover:text-white hover:border-brand-600 transition-all duration-300 shadow-lg"
             aria-label="Scroll right"
           >
             <ChevronRight className="w-5 h-5" />
           </button>
 
-          <div
-            ref={scrollRef}
-            className="flex gap-4 sm:gap-5 overflow-x-auto pb-4 hide-scrollbar px-1"
-          >
+          <div ref={scrollRef} className="flex gap-4 sm:gap-5 overflow-x-auto pb-4 hide-scrollbar px-1">
             {sectors.map((sector, i) => (
               <SectorCard key={sector.title} {...sector} index={i} inView={inView} />
             ))}
           </div>
         </div>
 
-        {/* Notable Projects Banner */}
+        {/* Notable Projects */}
         <div
-          className={`mt-10 md:mt-14 p-6 sm:p-8 rounded-2xl border border-teal-500/20 transition-all duration-700 delay-500 ${
+          className={`mt-10 md:mt-14 p-6 sm:p-8 rounded-2xl bg-white border border-brand-100 shadow-sm transition-all duration-700 delay-500 ${
             inView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
           }`}
-          style={{ background: 'rgba(0,201,167,0.08)' }}
         >
-          <h3 className="text-white font-bold text-base sm:text-lg mb-5 text-center">
+          <h3 className="text-brand-950 font-bold text-base sm:text-lg mb-5 text-center">
             Notable Installations
           </h3>
           <div className="flex flex-wrap justify-center gap-3">
@@ -186,20 +162,13 @@ export default function Experience() {
             ].map((name) => (
               <span
                 key={name}
-                className="px-3 py-1.5 text-xs sm:text-sm text-teal-300 border border-teal-500/30 rounded-full hover:bg-teal-500/20 hover:border-teal-400 transition-all duration-300"
+                className="px-3 py-1.5 text-xs sm:text-sm text-brand-700 bg-brand-50 border border-brand-200 rounded-full hover:bg-brand-100 hover:border-brand-300 transition-all duration-300"
               >
                 {name}
               </span>
             ))}
           </div>
         </div>
-      </div>
-
-      {/* Wave Divider Bottom */}
-      <div className="absolute bottom-0 left-0 right-0">
-        <svg viewBox="0 0 1440 60" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full" preserveAspectRatio="none">
-          <path d="M0,30 C480,60 960,0 1440,30 L1440,60 L0,60 Z" fill="#F5F7FA" />
-        </svg>
       </div>
     </section>
   );

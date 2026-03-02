@@ -18,9 +18,7 @@ export default function Navbar() {
   const [activeSection, setActiveSection] = useState('hero');
 
   useEffect(() => {
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 50);
-    };
+    const handleScroll = () => setScrolled(window.scrollY > 50);
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
@@ -29,7 +27,7 @@ export default function Navbar() {
     <nav
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
         scrolled
-          ? 'bg-navy-900/95 backdrop-blur-md shadow-2xl shadow-navy-900/30'
+          ? 'bg-white/95 backdrop-blur-md shadow-lg shadow-brand-900/5 border-b border-brand-100/50'
           : 'bg-transparent'
       }`}
     >
@@ -40,17 +38,21 @@ export default function Navbar() {
             to="hero"
             smooth
             duration={600}
-            className="flex items-center gap-2 cursor-pointer group"
+            className="flex items-center gap-2.5 cursor-pointer group"
           >
-            <div className="relative w-10 h-10 md:w-12 md:h-12 rounded-xl bg-gradient-to-br from-teal-400 to-teal-600 flex items-center justify-center shadow-[0_0_16px_rgba(0,201,167,0.7)] border border-teal-300/50 group-hover:scale-110 group-hover:shadow-[0_0_28px_rgba(0,201,167,0.9)] transition-all duration-300">
+            <div className="relative w-10 h-10 md:w-12 md:h-12 rounded-xl bg-gradient-to-br from-brand-500 to-brand-600 flex items-center justify-center shadow-lg shadow-brand-500/30 group-hover:scale-110 group-hover:shadow-brand-500/50 transition-all duration-300">
               <Droplets className="w-5 h-5 md:w-6 md:h-6 text-white drop-shadow" />
-              <span className="absolute inset-0 rounded-xl animate-pulse-slow bg-teal-400/20" />
+              <span className="absolute inset-0 rounded-xl animate-pulse-slow bg-brand-400/20" />
             </div>
             <div className="hidden xs:block">
-              <p className="text-white font-extrabold text-sm sm:text-base leading-tight tracking-wide drop-shadow">
+              <p className={`font-extrabold text-sm sm:text-base leading-tight tracking-wide drop-shadow-sm ${
+                scrolled ? 'text-brand-900' : 'text-white'
+              } transition-colors duration-500`}>
                 Kumar Pure Water
               </p>
-              <p className="text-teal-400 text-[0.65rem] sm:text-xs font-semibold leading-tight tracking-widest uppercase">
+              <p className={`text-[0.65rem] sm:text-xs font-semibold leading-tight tracking-widest uppercase ${
+                scrolled ? 'text-brand-500' : 'text-brand-200'
+              } transition-colors duration-500`}>
                 Solution Pvt. Ltd.
               </p>
             </div>
@@ -68,8 +70,12 @@ export default function Navbar() {
                 onSetActive={() => setActiveSection(link.to)}
                 className={`px-3 lg:px-4 py-2 text-sm font-medium rounded-lg cursor-pointer transition-all duration-300 ${
                   activeSection === link.to
-                    ? 'text-teal-500 bg-teal-500/10'
-                    : 'text-white/80 hover:text-white hover:bg-white/10'
+                    ? scrolled
+                      ? 'text-brand-600 bg-brand-50'
+                      : 'text-white bg-white/20'
+                    : scrolled
+                      ? 'text-slate-600 hover:text-brand-600 hover:bg-brand-50'
+                      : 'text-white/85 hover:text-white hover:bg-white/15'
                 }`}
               >
                 {link.label}
@@ -79,7 +85,7 @@ export default function Navbar() {
               to="contact"
               smooth
               duration={600}
-              className="ml-2 px-4 py-2 bg-gradient-to-r from-teal-500 to-teal-600 text-white text-sm font-semibold rounded-xl hover:shadow-lg hover:shadow-teal-500/30 hover:-translate-y-0.5 transition-all duration-300 cursor-pointer"
+              className="ml-2 px-4 py-2 bg-gradient-to-r from-brand-600 to-brand-500 text-white text-sm font-semibold rounded-xl hover:shadow-lg hover:shadow-brand-500/30 hover:-translate-y-0.5 transition-all duration-300 cursor-pointer"
             >
               Get a Quote
             </Link>
@@ -87,7 +93,9 @@ export default function Navbar() {
 
           {/* Mobile Menu Button */}
           <button
-            className="md:hidden text-white p-2 rounded-lg hover:bg-white/10 transition-colors"
+            className={`md:hidden p-2 rounded-lg transition-colors ${
+              scrolled ? 'text-brand-800 hover:bg-brand-50' : 'text-white hover:bg-white/15'
+            }`}
             onClick={() => setMenuOpen(!menuOpen)}
             aria-label="Toggle menu"
           >
@@ -102,7 +110,7 @@ export default function Navbar() {
           menuOpen ? 'max-h-screen opacity-100' : 'max-h-0 opacity-0'
         }`}
       >
-        <div className="bg-navy-900/98 backdrop-blur-md px-4 pb-4 pt-2 space-y-1 border-t border-white/10">
+        <div className="bg-white/98 backdrop-blur-md px-4 pb-4 pt-2 space-y-1 border-t border-brand-100/50 shadow-xl">
           {navLinks.map((link) => (
             <Link
               key={link.to}
@@ -110,7 +118,7 @@ export default function Navbar() {
               smooth
               duration={600}
               onClick={() => setMenuOpen(false)}
-              className="block px-4 py-3 text-white/80 hover:text-white hover:bg-white/10 rounded-lg font-medium transition-all duration-300 cursor-pointer"
+              className="block px-4 py-3 text-slate-600 hover:text-brand-600 hover:bg-brand-50 rounded-lg font-medium transition-all duration-300 cursor-pointer"
             >
               {link.label}
             </Link>
@@ -120,7 +128,7 @@ export default function Navbar() {
             smooth
             duration={600}
             onClick={() => setMenuOpen(false)}
-            className="block mt-2 px-4 py-3 bg-gradient-to-r from-teal-500 to-teal-600 text-white font-semibold rounded-xl text-center cursor-pointer"
+            className="block mt-2 px-4 py-3 bg-gradient-to-r from-brand-600 to-brand-500 text-white font-semibold rounded-xl text-center cursor-pointer"
           >
             Get a Quote
           </Link>

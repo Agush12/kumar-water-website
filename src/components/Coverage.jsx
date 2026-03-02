@@ -2,12 +2,6 @@ import { useState } from 'react';
 import { useInView } from 'react-intersection-observer';
 import { MapPin, Droplets } from 'lucide-react';
 
-/**
- * State positions calculated from real lat/lon using:
- *   x = (lon - 68) / 29 * 340 + 20
- *   y = (37 - lat) / 29 * 400 + 20
- * ViewBox: "0 0 380 440"
- */
 const states = [
   { name: 'Jammu & Kashmir', abbr: 'J&K',  x: 102, y: 75,  major: false },
   { name: 'Punjab',           abbr: 'PB',   x: 108, y: 103, major: false },
@@ -23,16 +17,9 @@ const states = [
   { name: 'Jharkhand',        abbr: 'JH',   x: 223, y: 209, major: false },
 ];
 
-// Agra HQ position: 27.18°N, 78.01°E
-// x = (78.01-68)/29*340+20 ≈ 137, y = (37-27.18)/29*400+20 ≈ 156
 const HQ_X = 137;
 const HQ_Y = 156;
 
-/**
- * India outline path — geographically accurate simplified tracing.
- * Key border points mapped to the same coordinate system as state dots.
- * Clockwise from NW (J&K top-left).
- */
 const INDIA_PATH = `
   M 90,20
   L 110,12 L 132,10 L 149,20 L 158,30
@@ -74,81 +61,33 @@ const INDIA_PATH = `
 function IndiaMapSVG({ activeState, onHover }) {
   return (
     <div className="relative w-full max-w-sm mx-auto select-none">
-      <svg
-        viewBox="0 0 380 440"
-        className="w-full"
-        style={{ filter: 'drop-shadow(0 8px 32px rgba(0,0,0,0.5))' }}
-      >
-        {/* Glow layer behind map */}
-        <path
-          d={INDIA_PATH}
-          fill="rgba(0,201,167,0.04)"
-          stroke="none"
-          strokeWidth="0"
-          style={{ filter: 'blur(8px)' }}
-        />
-
-        {/* India body fill */}
-        <path
-          d={INDIA_PATH}
-          fill="rgba(11,60,93,0.55)"
-          stroke="rgba(0,201,167,0.55)"
-          strokeWidth="1.5"
-          strokeLinejoin="round"
-        />
-
-        {/* Inner subtle texture lines */}
-        <path
-          d={INDIA_PATH}
-          fill="none"
-          stroke="rgba(0,201,167,0.12)"
-          strokeWidth="4"
-          strokeLinejoin="round"
-        />
+      <svg viewBox="0 0 380 440" className="w-full" style={{ filter: 'drop-shadow(0 4px 20px rgba(37,99,235,0.15))' }}>
+        {/* India body */}
+        <path d={INDIA_PATH} fill="#EFF6FF" stroke="#93C5FD" strokeWidth="1.5" strokeLinejoin="round" />
+        <path d={INDIA_PATH} fill="none" stroke="#BFDBFE" strokeWidth="4" strokeLinejoin="round" />
 
         {/* State dots */}
         {states.map((state) => {
           const isActive = activeState === state.name;
           return (
             <g key={state.name}>
-              {/* Outer pulse ring when active */}
               {isActive && (
-                <circle
-                  cx={state.x}
-                  cy={state.y}
-                  r={state.major ? 10 : 8}
-                  fill="rgba(0,201,167,0.15)"
-                  stroke="rgba(0,201,167,0.4)"
-                  strokeWidth="1"
-                />
+                <circle cx={state.x} cy={state.y} r={state.major ? 10 : 8} fill="rgba(37,99,235,0.12)" stroke="rgba(37,99,235,0.3)" strokeWidth="1" />
               )}
-              {/* Main dot */}
               <circle
                 cx={state.x}
                 cy={state.y}
                 r={state.major ? 5 : 3.8}
-                fill={isActive ? '#00C9A7' : 'rgba(0,201,167,0.6)'}
-                stroke={isActive ? 'white' : 'rgba(0,201,167,0.9)'}
+                fill={isActive ? '#2563EB' : '#60A5FA'}
+                stroke={isActive ? '#1E40AF' : '#3B82F6'}
                 strokeWidth={isActive ? '1.5' : '1'}
                 className="cursor-pointer transition-all duration-200"
                 onMouseEnter={() => onHover(state.name)}
                 onMouseLeave={() => onHover(null)}
-                style={{
-                  filter: isActive ? 'drop-shadow(0 0 8px #00C9A7)' : 'none',
-                }}
+                style={{ filter: isActive ? 'drop-shadow(0 0 6px #2563EB)' : 'none' }}
               />
-              {/* Abbreviation label */}
               {isActive && (
-                <text
-                  x={state.x}
-                  y={state.y - 9}
-                  textAnchor="middle"
-                  fontSize="8"
-                  fill="white"
-                  fontFamily="Poppins, sans-serif"
-                  fontWeight="700"
-                  style={{ filter: 'drop-shadow(0 1px 3px rgba(0,0,0,0.8))' }}
-                >
+                <text x={state.x} y={state.y - 9} textAnchor="middle" fontSize="8" fill="#1E40AF" fontFamily="Poppins, sans-serif" fontWeight="700">
                   {state.abbr}
                 </text>
               )}
@@ -156,56 +95,20 @@ function IndiaMapSVG({ activeState, onHover }) {
           );
         })}
 
-        {/* HQ marker — Agra */}
+        {/* HQ Marker */}
         <g>
-          {/* Pulse ring */}
-          <circle
-            cx={HQ_X}
-            cy={HQ_Y}
-            r="10"
-            fill="rgba(0,201,167,0.15)"
-            stroke="rgba(0,201,167,0.5)"
-            strokeWidth="1"
-          >
-            <animate
-              attributeName="r"
-              values="8;14;8"
-              dur="2.5s"
-              repeatCount="indefinite"
-            />
-            <animate
-              attributeName="opacity"
-              values="0.6;0;0.6"
-              dur="2.5s"
-              repeatCount="indefinite"
-            />
+          <circle cx={HQ_X} cy={HQ_Y} r="10" fill="rgba(37,99,235,0.1)" stroke="rgba(37,99,235,0.4)" strokeWidth="1">
+            <animate attributeName="r" values="8;14;8" dur="2.5s" repeatCount="indefinite" />
+            <animate attributeName="opacity" values="0.6;0;0.6" dur="2.5s" repeatCount="indefinite" />
           </circle>
-          {/* Star/pin shape for HQ */}
-          <circle
-            cx={HQ_X}
-            cy={HQ_Y}
-            r="5"
-            fill="#00C9A7"
-            stroke="white"
-            strokeWidth="1.5"
-            style={{ filter: 'drop-shadow(0 0 6px #00C9A7)' }}
-          />
+          <circle cx={HQ_X} cy={HQ_Y} r="5" fill="#2563EB" stroke="white" strokeWidth="1.5" style={{ filter: 'drop-shadow(0 0 4px #2563EB)' }} />
           <circle cx={HQ_X} cy={HQ_Y} r="2" fill="white" />
-          {/* HQ label */}
-          <text
-            x={HQ_X}
-            y={HQ_Y + 16}
-            textAnchor="middle"
-            fontSize="7"
-            fill="#00C9A7"
-            fontFamily="Poppins, sans-serif"
-            fontWeight="700"
-          >
+          <text x={HQ_X} y={HQ_Y + 16} textAnchor="middle" fontSize="7" fill="#2563EB" fontFamily="Poppins, sans-serif" fontWeight="700">
             AGRA HQ
           </text>
         </g>
 
-        {/* Tooltip bubble above active dot */}
+        {/* Tooltip */}
         {activeState && (() => {
           const s = states.find((st) => st.name === activeState);
           if (!s) return null;
@@ -214,27 +117,9 @@ function IndiaMapSVG({ activeState, onHover }) {
           const ty = s.y - 32;
           return (
             <g>
-              <rect
-                x={tx}
-                y={ty}
-                width={tw}
-                height="18"
-                rx="5"
-                fill="#00C9A7"
-              />
-              <polygon
-                points={`${s.x - 4},${ty + 18} ${s.x + 4},${ty + 18} ${s.x},${ty + 24}`}
-                fill="#00C9A7"
-              />
-              <text
-                x={tx + tw / 2}
-                y={ty + 12}
-                textAnchor="middle"
-                fontSize="7.5"
-                fill="white"
-                fontFamily="Poppins, sans-serif"
-                fontWeight="600"
-              >
+              <rect x={tx} y={ty} width={tw} height="18" rx="5" fill="#2563EB" />
+              <polygon points={`${s.x - 4},${ty + 18} ${s.x + 4},${ty + 18} ${s.x},${ty + 24}`} fill="#2563EB" />
+              <text x={tx + tw / 2} y={ty + 12} textAnchor="middle" fontSize="7.5" fill="white" fontFamily="Poppins, sans-serif" fontWeight="600">
                 {s.name}
               </text>
             </g>
@@ -265,13 +150,12 @@ export default function Coverage() {
   const { ref, inView } = useInView({ threshold: 0.1, triggerOnce: true });
 
   return (
-    <section id="coverage" className="py-16 md:py-24 bg-[#F5F7FA] relative overflow-hidden">
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[50rem] h-[20rem] bg-navy-900/3 rounded-full blur-3xl" />
+    <section id="coverage" className="py-16 md:py-24 bg-white relative overflow-hidden">
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[50rem] h-[20rem] bg-brand-100/30 rounded-full blur-3xl" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Header */}
         <div className="text-center mb-12 md:mb-16">
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 bg-teal-500/10 border border-teal-500/30 rounded-full text-teal-600 text-xs sm:text-sm font-semibold mb-4 tracking-wide uppercase">
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 bg-brand-50 border border-brand-200 rounded-full text-brand-600 text-xs sm:text-sm font-semibold mb-4 tracking-wide uppercase">
             <MapPin className="w-4 h-4" />
             Pan-India Coverage
           </div>
@@ -286,19 +170,15 @@ export default function Coverage() {
         </div>
 
         <div ref={ref} className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center">
-          {/* Map Visual */}
-          <div
-            className={`transition-all duration-700 ${
-              inView ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-12'
-            }`}
-          >
-            <div className="bg-navy-gradient rounded-3xl p-6 sm:p-8 shadow-2xl border border-navy-800/20">
+          {/* Map */}
+          <div className={`transition-all duration-700 ${inView ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-12'}`}>
+            <div className="bg-white rounded-3xl p-6 sm:p-8 shadow-xl shadow-brand-500/8 border border-brand-100">
               <div className="flex items-center justify-between mb-4">
                 <div>
-                  <h3 className="text-white font-bold text-base">Service Coverage Map</h3>
-                  <p className="text-white/50 text-xs mt-0.5">Hover over dots to explore states</p>
+                  <h3 className="text-brand-950 font-bold text-base">Service Coverage Map</h3>
+                  <p className="text-slate-400 text-xs mt-0.5">Hover over dots to explore states</p>
                 </div>
-                <div className="flex items-center gap-2 text-teal-400 text-xs font-semibold">
+                <div className="flex items-center gap-2 text-brand-600 text-xs font-semibold">
                   <Droplets className="w-4 h-4" />
                   12+ States
                 </div>
@@ -306,13 +186,13 @@ export default function Coverage() {
 
               <IndiaMapSVG activeState={activeState} onHover={setActiveState} />
 
-              <div className="mt-5 flex flex-wrap items-center gap-4 text-xs text-white/40">
+              <div className="mt-5 flex flex-wrap items-center gap-4 text-xs text-slate-400">
                 <div className="flex items-center gap-2">
-                  <div className="w-3 h-3 rounded-full bg-teal-500/60 border border-teal-400/80" />
+                  <div className="w-3 h-3 rounded-full bg-brand-400 border border-brand-500" />
                   Service state
                 </div>
                 <div className="flex items-center gap-2">
-                  <div className="w-3 h-3 rounded-full bg-teal-500 border-2 border-white shadow-[0_0_8px_#00C9A7]" />
+                  <div className="w-3 h-3 rounded-full bg-brand-600 border-2 border-white shadow-[0_0_6px_#2563EB]" />
                   HQ — Agra, U.P.
                 </div>
               </div>
@@ -320,45 +200,40 @@ export default function Coverage() {
           </div>
 
           {/* State Grid */}
-          <div
-            className={`transition-all duration-700 delay-200 ${
-              inView ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-12'
-            }`}
-          >
+          <div className={`transition-all duration-700 delay-200 ${inView ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-12'}`}>
             <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
               {stateCards.map(({ name, flag, desc }, index) => (
                 <div
                   key={name}
                   className={`group p-3 sm:p-4 bg-white rounded-xl border-2 shadow-sm cursor-default transition-all duration-300 hover:-translate-y-1 hover:shadow-lg ${
                     activeState === name
-                      ? 'border-teal-500 shadow-teal-500/20 -translate-y-1'
-                      : 'border-gray-100 hover:border-teal-500/40'
+                      ? 'border-brand-500 shadow-brand-500/15 -translate-y-1'
+                      : 'border-gray-100 hover:border-brand-300'
                   }`}
                   style={{ transitionDelay: `${index * 50}ms` }}
                   onMouseEnter={() => setActiveState(name)}
                   onMouseLeave={() => setActiveState(null)}
                 >
                   <div className="text-xl mb-1.5">{flag}</div>
-                  <p className="text-navy-900 font-bold text-xs sm:text-sm leading-tight">{name}</p>
-                  <p className="text-gray-400 text-[0.65rem] sm:text-xs mt-0.5 leading-tight">{desc}</p>
+                  <p className="text-brand-950 font-bold text-xs sm:text-sm leading-tight">{name}</p>
+                  <p className="text-slate-400 text-[0.65rem] sm:text-xs mt-0.5 leading-tight">{desc}</p>
                 </div>
               ))}
             </div>
 
-            {/* Stats strip */}
-            <div className="mt-5 p-4 bg-navy-gradient rounded-2xl text-white">
+            <div className="mt-5 p-4 bg-gradient-to-r from-brand-600 to-brand-500 rounded-2xl text-white">
               <div className="grid grid-cols-3 gap-4 text-center">
                 <div>
-                  <p className="text-2xl font-black text-teal-400">12+</p>
-                  <p className="text-xs text-white/60 mt-0.5">States</p>
+                  <p className="text-2xl font-black text-white">12+</p>
+                  <p className="text-xs text-brand-100 mt-0.5">States</p>
                 </div>
                 <div>
-                  <p className="text-2xl font-black text-teal-400">25+</p>
-                  <p className="text-xs text-white/60 mt-0.5">Cities</p>
+                  <p className="text-2xl font-black text-white">25+</p>
+                  <p className="text-xs text-brand-100 mt-0.5">Cities</p>
                 </div>
                 <div>
-                  <p className="text-2xl font-black text-teal-400">500+</p>
-                  <p className="text-xs text-white/60 mt-0.5">Clients</p>
+                  <p className="text-2xl font-black text-white">500+</p>
+                  <p className="text-xs text-brand-100 mt-0.5">Clients</p>
                 </div>
               </div>
             </div>

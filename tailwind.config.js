@@ -7,23 +7,28 @@ export default {
   theme: {
     extend: {
       colors: {
-        navy: {
-          50: '#e8f0f7',
-          100: '#c5d8eb',
-          200: '#9ebfdd',
-          300: '#77a5cf',
-          400: '#5991c5',
-          500: '#3b7ebb',
-          600: '#2d6aaa',
-          700: '#1f5594',
-          800: '#134077',
-          900: '#0B3C5D',
-          950: '#072538',
+        brand: {
+          50:  '#EFF6FF',
+          100: '#DBEAFE',
+          200: '#BFDBFE',
+          300: '#93C5FD',
+          400: '#60A5FA',
+          500: '#3B82F6',
+          600: '#2563EB',
+          700: '#1D4ED8',
+          800: '#1E40AF',
+          900: '#1E3A5F',
+          950: '#0F172A',
         },
-        teal: {
-          400: '#2dd4bf',
-          500: '#00C9A7',
-          600: '#00a98d',
+        accent: {
+          300: '#67E8F9',
+          400: '#22D3EE',
+          500: '#06B6D4',
+          600: '#0891B2',
+        },
+        mint: {
+          400: '#34D399',
+          500: '#10B981',
         },
       },
       fontFamily: {
@@ -36,7 +41,6 @@ export default {
         'ripple': 'ripple 4s linear infinite',
         'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
         'spin-slow': 'spin 8s linear infinite',
-        'counter': 'counter 2s ease-out forwards',
         'slide-left': 'slideLeft 0.6s ease forwards',
         'slide-right': 'slideRight 0.6s ease forwards',
         'glow': 'glow 2s ease-in-out infinite alternate',
@@ -68,8 +72,8 @@ export default {
           '100%': { opacity: '1', transform: 'translateX(0)' },
         },
         glow: {
-          '0%': { boxShadow: '0 0 5px #00C9A7, 0 0 10px #00C9A7' },
-          '100%': { boxShadow: '0 0 20px #00C9A7, 0 0 40px #00C9A7, 0 0 60px #00C9A750' },
+          '0%': { boxShadow: '0 0 5px #06B6D4, 0 0 10px #06B6D4' },
+          '100%': { boxShadow: '0 0 20px #06B6D4, 0 0 40px #06B6D4, 0 0 60px #06B6D450' },
         },
         bubble: {
           '0%': { transform: 'translateY(100%) scale(0)', opacity: '0' },
@@ -77,14 +81,6 @@ export default {
           '90%': { opacity: '0.3' },
           '100%': { transform: 'translateY(-100vh) scale(1.5)', opacity: '0' },
         },
-      },
-      backgroundImage: {
-        'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
-        'hero-gradient': 'linear-gradient(135deg, #072538 0%, #0B3C5D 50%, #1a5276 100%)',
-        'card-gradient': 'linear-gradient(135deg, #0B3C5D, #1a5276)',
-      },
-      backdropBlur: {
-        xs: '2px',
       },
       screens: {
         'xs': '375px',
