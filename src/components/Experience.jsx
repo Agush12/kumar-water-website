@@ -2,91 +2,193 @@ import { useRef } from 'react';
 import { useInView } from 'react-intersection-observer';
 import {
   Shield, Building2, Stethoscope, GraduationCap, Train,
-  Hotel, Factory, Newspaper, Droplets, ChevronLeft, ChevronRight,
+  Hotel, Factory, Newspaper, ChevronLeft, ChevronRight, Siren,
 } from 'lucide-react';
+import logo from '../assets/logo.png';
 
 const sectors = [
   {
-    icon: Shield,
-    title: 'Government & Defence',
-    clients: ['U.P. Police', 'Uttarakhand Police', 'Indian Air Force', 'Army Units'],
+    icon: Building2,
+    title: 'Government Agencies',
+    badge: 'GOVT.',
+    clients: [
+      'U.P. Police & PAC',
+      'Uttarakhand Police',
+      'Judge Compound & Court',
+      'Nagar Nigam',
+    ],
     color: '#2563EB',
+  },
+  {
+    icon: Shield,
+    title: 'Defence Forces',
+    badge: 'DEFENCE',
+    clients: [
+      'Indian Air Force',
+      'Indian Army',
+      'ITBP',
+      'NDRF',
+      'SSB',
+    ],
+    color: '#0F172A',
   },
   {
     icon: Stethoscope,
     title: 'Hospitals & Medical',
-    clients: ['Multi-specialty Hospitals', 'Clinics & Labs', 'Pharmaceutical Plants', 'Blood Banks'],
+    badge: 'MEDICAL',
+    clients: [
+      'Multi-specialty Hospitals',
+      'Dialysis Plants',
+      'Pharmaceutical Plants',
+      'Clinics & Blood Banks',
+    ],
     color: '#06B6D4',
   },
   {
     icon: GraduationCap,
     title: 'Education',
-    clients: ['Schools', 'Colleges', 'Universities', 'Research Institutes'],
+    badge: 'EDUCATION',
+    clients: [
+      'Schools & Colleges',
+      'Universities',
+      'Research Institutes',
+      'Hostels & Canteens',
+    ],
     color: '#8B5CF6',
   },
   {
     icon: Hotel,
     title: 'Hospitality',
-    clients: ['Hotels', 'Restaurants', 'Resorts', 'Banquet Halls'],
+    badge: 'HOSPITALITY',
+    clients: [
+      'Hotels & Resorts',
+      'Restaurants',
+      'Banquet Halls',
+      'Guest Houses',
+    ],
     color: '#F59E0B',
   },
   {
     icon: Train,
     title: 'Railways & Transport',
-    clients: ['Railway Stations', 'Bus Terminals', 'Roadways', 'Transit Hubs'],
+    badge: 'TRANSPORT',
+    clients: [
+      'UPSRTC Bus Depots',
+      'Railway Stations',
+      'Highway Rest Areas',
+      'Transit Hubs',
+    ],
     color: '#EF4444',
   },
   {
     icon: Newspaper,
     title: 'Media & Corporate',
-    clients: ['Amar Ujala Group', 'Corporate Offices', 'IT Parks', 'Business Centers'],
+    badge: 'CORPORATE',
+    clients: [
+      'Amar Ujala Group',
+      'MNC Offices',
+      'IT & Business Parks',
+      'Corporate Campuses',
+    ],
     color: '#10B981',
   },
   {
     icon: Factory,
     title: 'Industries',
-    clients: ['Manufacturing Plants', 'Textile Mills', 'Food Processing', 'Chemical Plants'],
+    badge: 'INDUSTRY',
+    clients: [
+      'Manufacturing Plants',
+      'Food Processing Units',
+      'Textile Mills',
+      'Chemical Plants',
+    ],
     color: '#F97316',
   },
   {
-    icon: Building2,
-    title: 'Real Estate',
-    clients: ['Housing Societies', 'Residential Complexes', 'Townships', 'Commercial Plazas'],
-    color: '#EC4899',
+    icon: Siren,
+    title: 'Special Forces',
+    badge: 'SPECIAL',
+    clients: [
+      'Indian Special Forces',
+      'Para-military Units',
+      'Border Security',
+      'Central Armed Forces',
+    ],
+    color: '#64748B',
   },
 ];
 
-function SectorCard({ icon: Icon, title, clients, color, index, inView }) {
+const notableInstallations = [
+  { label: 'U.P. Police & PAC',        category: 'Govt.' },
+  { label: 'Uttarakhand Police',        category: 'Govt.' },
+  { label: 'Indian Air Force',          category: 'Defence' },
+  { label: 'Indian Army',               category: 'Defence' },
+  { label: 'Indian Special Forces',     category: 'Defence' },
+  { label: 'ITBP / NDRF / SSB',         category: 'Defence' },
+  { label: 'Amar Ujala Group',          category: 'Media' },
+  { label: 'MNCs',                      category: 'Corporate' },
+  { label: 'UPSRTC Units',              category: 'Transport' },
+  { label: 'Universities',              category: 'Education' },
+  { label: 'Multi-specialty Hospitals', category: 'Medical' },
+  { label: 'Dialysis Plants',           category: 'Medical' },
+];
+
+const categoryColors = {
+  'Govt.':     { bg: 'bg-blue-50',   border: 'border-blue-200',   text: 'text-blue-700',   dot: 'bg-blue-500'   },
+  'Defence':   { bg: 'bg-slate-50',  border: 'border-slate-300',  text: 'text-slate-700',  dot: 'bg-slate-500'  },
+  'Media':     { bg: 'bg-green-50',  border: 'border-green-200',  text: 'text-green-700',  dot: 'bg-green-500'  },
+  'Corporate': { bg: 'bg-emerald-50',border: 'border-emerald-200',text: 'text-emerald-700',dot: 'bg-emerald-500'},
+  'Transport': { bg: 'bg-red-50',    border: 'border-red-200',    text: 'text-red-700',    dot: 'bg-red-500'    },
+  'Education': { bg: 'bg-purple-50', border: 'border-purple-200', text: 'text-purple-700', dot: 'bg-purple-500' },
+  'Medical':   { bg: 'bg-cyan-50',   border: 'border-cyan-200',   text: 'text-cyan-700',   dot: 'bg-cyan-500'   },
+};
+
+function SectorCard({ icon: Icon, title, badge, clients, color, index, inView }) {
   return (
     <div
-      className={`flex-shrink-0 w-64 sm:w-72 rounded-2xl p-6 bg-white border border-gray-100 shadow-md transition-all duration-500 hover:-translate-y-2 hover:shadow-xl cursor-default group ${
+      className={`flex-shrink-0 w-60 sm:w-68 rounded-2xl bg-white border border-gray-100 shadow-md transition-all duration-500 hover:-translate-y-2 hover:shadow-xl cursor-default group overflow-hidden ${
         inView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
       }`}
-      style={{ transitionDelay: `${index * 80}ms` }}
+      style={{ transitionDelay: `${index * 80}ms`, width: '17rem' }}
       onMouseEnter={(e) => {
         e.currentTarget.style.borderColor = color;
-        e.currentTarget.style.boxShadow = `0 12px 40px ${color}15`;
+        e.currentTarget.style.boxShadow = `0 16px 40px ${color}18`;
       }}
       onMouseLeave={(e) => {
         e.currentTarget.style.borderColor = '#f3f4f6';
         e.currentTarget.style.boxShadow = '';
       }}
     >
-      <div
-        className="w-12 h-12 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300"
-        style={{ background: `${color}12`, border: `1.5px solid ${color}30` }}
-      >
-        <Icon className="w-6 h-6" style={{ color }} />
+      {/* Colored top strip */}
+      <div className="h-1 w-full" style={{ background: `linear-gradient(90deg, ${color}, ${color}60)` }} />
+
+      <div className="p-5 sm:p-6">
+        <div className="flex items-center justify-between mb-4">
+          <div
+            className="w-11 h-11 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300"
+            style={{ background: `${color}12`, border: `1.5px solid ${color}30` }}
+          >
+            <Icon className="w-5 h-5" style={{ color }} />
+          </div>
+          <span
+            className="text-[0.6rem] font-bold tracking-widest px-2 py-0.5 rounded-full"
+            style={{ background: `${color}12`, color }}
+          >
+            {badge}
+          </span>
+        </div>
+
+        <h3 className="text-brand-950 font-bold text-sm sm:text-base mb-3 leading-tight">{title}</h3>
+
+        <ul className="space-y-2">
+          {clients.map((c) => (
+            <li key={c} className="flex items-center gap-2 text-slate-500 text-xs sm:text-sm">
+              <span className="w-1.5 h-1.5 rounded-full flex-shrink-0" style={{ background: color }} />
+              {c}
+            </li>
+          ))}
+        </ul>
       </div>
-      <h3 className="text-brand-950 font-bold text-base mb-3">{title}</h3>
-      <ul className="space-y-1.5">
-        {clients.map((c) => (
-          <li key={c} className="flex items-center gap-2 text-slate-500 text-sm">
-            <span className="w-1.5 h-1.5 rounded-full flex-shrink-0" style={{ background: color }} />
-            {c}
-          </li>
-        ))}
-      </ul>
     </div>
   );
 }
@@ -109,7 +211,7 @@ export default function Experience() {
         {/* Header */}
         <div ref={ref} className="text-center mb-10 md:mb-14">
           <div className="inline-flex items-center gap-2 px-4 py-1.5 bg-brand-50 border border-brand-200 rounded-full text-brand-600 text-xs sm:text-sm font-semibold mb-4 tracking-wide uppercase">
-            <Droplets className="w-4 h-4" />
+            <img src={logo} alt="" className="w-4 h-4 object-contain" />
             Industry Experience
           </div>
           <h2 className="section-title">
@@ -117,7 +219,7 @@ export default function Experience() {
             <span className="text-gradient">Every Sector</span>
           </h2>
           <p className="section-subtitle max-w-xl mx-auto">
-            From government defence units to five-star hotels — our installations speak for themselves.
+            From government defence forces to five-star hotels — our installations speak for themselves.
           </p>
         </div>
 
@@ -145,27 +247,42 @@ export default function Experience() {
           </div>
         </div>
 
-        {/* Notable Projects */}
+        {/* Notable Installations */}
         <div
-          className={`mt-10 md:mt-14 p-6 sm:p-8 rounded-2xl bg-white border border-brand-100 shadow-sm transition-all duration-700 delay-500 ${
+          className={`mt-10 md:mt-14 bg-white border border-brand-100 rounded-2xl shadow-sm overflow-hidden transition-all duration-700 delay-500 ${
             inView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
           }`}
         >
-          <h3 className="text-brand-950 font-bold text-base sm:text-lg mb-5 text-center">
-            Notable Installations
-          </h3>
-          <div className="flex flex-wrap justify-center gap-3">
-            {[
-              'U.P. Police HQ', 'Uttarakhand Police', 'Indian Air Force Base',
-              'Army Canteen', 'Amar Ujala Group', 'IRCTC Units',
-              'Multi-specialty Hospitals', 'IIT Outreach', 'Highway Plazas',
-            ].map((name) => (
-              <span
-                key={name}
-                className="px-3 py-1.5 text-xs sm:text-sm text-brand-700 bg-brand-50 border border-brand-200 rounded-full hover:bg-brand-100 hover:border-brand-300 transition-all duration-300"
-              >
-                {name}
-              </span>
+          {/* Header */}
+          <div className="flex items-center gap-3 px-6 sm:px-8 py-4 border-b border-brand-50 bg-brand-50/50">
+            <div className="w-2 h-6 rounded-full bg-gradient-to-b from-brand-600 to-brand-400" />
+            <h3 className="text-brand-950 font-bold text-base sm:text-lg">Notable Installations</h3>
+            <span className="ml-auto text-xs text-slate-400 font-medium">{notableInstallations.length} Projects</span>
+          </div>
+
+          {/* Tags */}
+          <div className="px-6 sm:px-8 py-6 flex flex-wrap gap-2.5">
+            {notableInstallations.map(({ label, category }) => {
+              const c = categoryColors[category] || categoryColors['Govt.'];
+              return (
+                <span
+                  key={label}
+                  className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs sm:text-sm font-medium border ${c.bg} ${c.border} ${c.text} hover:scale-105 transition-transform duration-200 cursor-default`}
+                >
+                  <span className={`w-1.5 h-1.5 rounded-full flex-shrink-0 ${c.dot}`} />
+                  {label}
+                </span>
+              );
+            })}
+          </div>
+
+          {/* Legend */}
+          <div className="px-6 sm:px-8 py-3 border-t border-brand-50 bg-slate-50/50 flex flex-wrap gap-x-5 gap-y-2">
+            {Object.entries(categoryColors).map(([cat, c]) => (
+              <div key={cat} className="flex items-center gap-1.5">
+                <span className={`w-2 h-2 rounded-full ${c.dot}`} />
+                <span className="text-xs text-slate-500 font-medium">{cat}</span>
+              </div>
             ))}
           </div>
         </div>

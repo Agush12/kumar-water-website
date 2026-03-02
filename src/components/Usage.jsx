@@ -1,8 +1,9 @@
 import { useInView } from 'react-intersection-observer';
 import {
   Home, Hotel, School, FlaskConical, Package, Pill,
-  Waves, Bird, Factory, Droplets,
+  Waves, Bird, Factory,
 } from 'lucide-react';
+import logo from '../assets/logo.png';
 
 const usageCategories = [
   { icon: Home,          title: 'Homes & Offices',       description: 'Pure water for daily living and workspace hydration',    color: '#2563EB' },
@@ -75,7 +76,7 @@ export default function Usage() {
         {/* Header */}
         <div className="text-center mb-12 md:mb-16">
           <div className="inline-flex items-center gap-2 px-4 py-1.5 bg-white border border-brand-200 rounded-full text-brand-600 text-xs sm:text-sm font-semibold mb-4 tracking-wide uppercase">
-            <Droplets className="w-4 h-4" />
+            <img src={logo} alt="" className="w-4 h-4 object-contain" />
             Area of Usage
           </div>
           <h2 className="section-title">

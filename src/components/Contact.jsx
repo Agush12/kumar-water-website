@@ -4,6 +4,7 @@ import {
   MapPin, Phone, Mail, Send, CheckCircle2,
   User, MessageSquare, Building2,
 } from 'lucide-react';
+import logo from '../assets/logo.png';
 
 const contactInfo = [
   {
@@ -62,7 +63,7 @@ export default function Contact() {
         {/* Header */}
         <div className="text-center mb-12 md:mb-16">
           <div className="inline-flex items-center gap-2 px-4 py-1.5 bg-white border border-brand-200 rounded-full text-brand-600 text-xs sm:text-sm font-semibold mb-4 tracking-wide uppercase">
-            <MessageSquare className="w-4 h-4" />
+            <img src={logo} alt="" className="w-4 h-4 object-contain" />
             Contact Us
           </div>
           <h2 className="section-title">

@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useInView } from 'react-intersection-observer';
-import { MapPin, Droplets } from 'lucide-react';
+import { MapPin } from 'lucide-react';
+import logo from '../assets/logo.png';
 
 const states = [
   { name: 'Jammu & Kashmir', abbr: 'J&K',  x: 102, y: 75,  major: false },
@@ -179,7 +180,7 @@ export default function Coverage() {
                   <p className="text-slate-400 text-xs mt-0.5">Hover over dots to explore states</p>
                 </div>
                 <div className="flex items-center gap-2 text-brand-600 text-xs font-semibold">
-                  <Droplets className="w-4 h-4" />
+                  <img src={logo} alt="" className="w-5 h-5 object-contain" />
                   12+ States
                 </div>
               </div>

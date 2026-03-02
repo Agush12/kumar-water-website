@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-scroll';
 import { ChevronDown, Award, Shield, Zap } from 'lucide-react';
+import logo from '../assets/logo.png';
 
 const badges = [
   { icon: Award, label: 'Since 1999' },
@@ -84,11 +85,13 @@ export default function Hero() {
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center pt-24 pb-16">
         {/* Tag */}
         <div
-          className={`inline-flex items-center gap-2 px-4 py-2 bg-white/15 border border-white/30 rounded-full text-white text-xs sm:text-sm font-medium mb-6 md:mb-8 backdrop-blur-sm transition-all duration-700 ${
+          className={`inline-flex items-center gap-2.5 px-4 py-2 bg-white/15 border border-white/30 rounded-full text-white text-xs sm:text-sm font-medium mb-6 md:mb-8 backdrop-blur-sm transition-all duration-700 ${
             loaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
           }`}
         >
-          <span className="w-2 h-2 bg-accent-300 rounded-full animate-ping" />
+          <div className="w-6 h-6 bg-white rounded-full flex items-center justify-center p-0.5 flex-shrink-0">
+            <img src={logo} alt="KPWS Logo" className="w-full h-full object-contain" />
+          </div>
           Northern India&apos;s Trusted Water Treatment Company
         </div>
 

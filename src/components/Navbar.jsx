@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
-import { Menu, X, Droplets } from 'lucide-react';
+import { Menu, X } from 'lucide-react';
 import { Link } from 'react-scroll';
+import logo from '../assets/logo.png';
 
 const navLinks = [
   { label: 'Home', to: 'hero' },
@@ -40,9 +41,8 @@ export default function Navbar() {
             duration={600}
             className="flex items-center gap-2.5 cursor-pointer group"
           >
-            <div className="relative w-10 h-10 md:w-12 md:h-12 rounded-xl bg-gradient-to-br from-brand-500 to-brand-600 flex items-center justify-center shadow-lg shadow-brand-500/30 group-hover:scale-110 group-hover:shadow-brand-500/50 transition-all duration-300">
-              <Droplets className="w-5 h-5 md:w-6 md:h-6 text-white drop-shadow" />
-              <span className="absolute inset-0 rounded-xl animate-pulse-slow bg-brand-400/20" />
+            <div className="relative w-11 h-11 md:w-13 md:h-13 rounded-xl bg-white flex items-center justify-center shadow-lg shadow-brand-500/20 group-hover:scale-110 group-hover:shadow-brand-500/40 transition-all duration-300 p-1 border border-brand-100">
+              <img src={logo} alt="Kumar Pure Water Logo" className="w-full h-full object-contain" />
             </div>
             <div className="hidden xs:block">
               <p className={`font-extrabold text-sm sm:text-base leading-tight tracking-wide drop-shadow-sm ${

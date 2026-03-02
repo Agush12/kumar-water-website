@@ -1,11 +1,16 @@
 import { useState } from 'react';
 import { useInView } from 'react-intersection-observer';
-import { Droplets, Factory, Waves, Zap, ArrowRight, Check } from 'lucide-react';
+import { Factory, Waves, Zap, ArrowRight, Check } from 'lucide-react';
+import logo from '../assets/logo.png';
+import commercialRoImg from '../assets/commercial-ro.png';
+import industrialRoImg from '../assets/industrial-ro.png';
+import stpEtpImg from '../assets/stp-etp.png';
+import hydraulicFountainImg from '../assets/hydraulic-fountain.png';
 
 const products = [
   {
     id: 'commercial-ro',
-    icon: Droplets,
+    image: commercialRoImg,
     title: 'Commercial RO Plants',
     subtitle: '50 LPH – 5,000 LPH',
     description: 'High-performance commercial RO systems for offices, restaurants, hotels, schools, and hospitals.',
@@ -22,7 +27,7 @@ const products = [
   },
   {
     id: 'industrial-ro',
-    icon: Factory,
+    image: industrialRoImg,
     title: 'Industrial RO Plants',
     subtitle: '5,000 LPH – 50,000 LPH',
     description: 'Heavy-duty industrial RO systems for manufacturing, pharmaceuticals, and institutional use.',
@@ -39,7 +44,7 @@ const products = [
   },
   {
     id: 'stp-etp',
-    icon: Zap,
+    image: stpEtpImg,
     title: 'STP / ETP Systems',
     subtitle: 'Sewage & Effluent Treatment',
     description: 'Complete STP and ETP solutions for industries, housing societies, hospitals and complexes.',
@@ -56,7 +61,7 @@ const products = [
   },
   {
     id: 'hydraulic-fountain',
-    icon: Waves,
+    image: hydraulicFountainImg,
     title: 'Hydraulic & Fountain Systems',
     subtitle: 'Pools & Decorative',
     description: 'Premium swimming pool treatment, decorative fountains, and hydraulic engineering solutions.',
@@ -86,35 +91,51 @@ function ProductCard({ product, index, inView }) {
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
     >
+      {/* Top accent line */}
       <div
-        className="h-1.5 w-full transition-all duration-300"
+        className="h-1.5 w-full flex-shrink-0"
         style={{ background: `linear-gradient(90deg, ${product.color}, ${product.color}80)` }}
       />
 
-      <div className={`relative h-44 sm:h-48 bg-gradient-to-br ${product.bgGradient} overflow-hidden`}>
-        <div className="absolute inset-0 flex items-center justify-center">
-          <div
-            className="w-20 h-20 rounded-2xl flex items-center justify-center transition-all duration-500 group-hover:scale-110 group-hover:rotate-3"
-            style={{ background: `${product.color}12`, border: `2px solid ${product.color}30` }}
-          >
-            <Icon className="w-10 h-10" style={{ color: product.color }} />
-          </div>
-        </div>
+      {/* Card image / icon area */}
+      <div className={`relative overflow-hidden ${product.image ? 'h-48 sm:h-52 md:h-56' : `h-44 sm:h-48 bg-gradient-to-br ${product.bgGradient}`}`}>
 
+        {product.image ? (
+          /* Real photo — fills the box, zooms gently on hover */
+          <img
+            src={product.image}
+            alt={product.title}
+            className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+            loading="lazy"
+          />
+        ) : (
+          /* Icon fallback for other cards */
+          <div className="absolute inset-0 flex items-center justify-center">
+            <div
+              className="w-20 h-20 rounded-2xl flex items-center justify-center transition-all duration-500 group-hover:scale-110 group-hover:rotate-3"
+              style={{ background: `${product.color}12`, border: `2px solid ${product.color}30` }}
+            >
+              <Icon className="w-10 h-10" style={{ color: product.color }} />
+            </div>
+          </div>
+        )}
+
+        {/* Hover overlay — slides up from bottom */}
         <div
-          className={`absolute inset-0 flex items-center justify-center transition-all duration-400 ${
+          className={`absolute inset-0 flex items-end justify-center pb-5 transition-all duration-400 ${
             hovered ? 'opacity-100' : 'opacity-0'
           }`}
-          style={{ background: `${product.color}E6` }}
+          style={{ background: `linear-gradient(to top, ${product.color}F0 0%, ${product.color}60 50%, transparent 100%)` }}
         >
-          <div className="text-center text-white px-4">
-            <p className="text-sm font-medium mb-1 text-white/90">View Details</p>
-            <ArrowRight className="w-6 h-6 mx-auto animate-pulse" />
+          <div className="flex items-center gap-2 text-white font-semibold text-sm">
+            <span>View Details</span>
+            <ArrowRight className="w-4 h-4" />
           </div>
         </div>
 
+        {/* Subtitle badge */}
         <div
-          className="absolute top-3 right-3 px-2.5 py-1 rounded-full text-xs font-semibold text-white"
+          className="absolute top-3 right-3 px-2.5 py-1 rounded-full text-xs font-semibold text-white shadow-lg"
           style={{ background: product.color }}
         >
           {product.subtitle}
@@ -164,7 +185,7 @@ export default function Products() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12 md:mb-16">
           <div className="inline-flex items-center gap-2 px-4 py-1.5 bg-brand-50 border border-brand-200 rounded-full text-brand-600 text-xs sm:text-sm font-semibold mb-4 tracking-wide uppercase">
-            <Factory className="w-4 h-4" />
+            <img src={logo} alt="" className="w-4 h-4 object-contain" />
             Our Products
           </div>
           <h2 className="section-title">

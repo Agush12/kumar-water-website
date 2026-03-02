@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { useInView } from 'react-intersection-observer';
-import { CheckCircle2, Droplets } from 'lucide-react';
+import { CheckCircle2 } from 'lucide-react';
+import logo from '../assets/logo.png';
 
 const stats = [
   { value: 25, suffix: '+', label: 'Years Experience', color: 'from-brand-600 to-brand-400' },
@@ -58,7 +59,7 @@ export default function About() {
         {/* Header */}
         <div className="text-center mb-12 md:mb-16">
           <div className="inline-flex items-center gap-2 px-4 py-1.5 bg-brand-50 border border-brand-200 rounded-full text-brand-600 text-xs sm:text-sm font-semibold mb-4 tracking-wide uppercase">
-            <Droplets className="w-4 h-4" />
+            <img src={logo} alt="" className="w-4 h-4 object-contain" />
             About Us
           </div>
           <h2 className="section-title">
@@ -84,8 +85,8 @@ export default function About() {
               <div className="w-full h-72 sm:h-80 md:h-96 bg-gradient-to-br from-brand-600 via-brand-500 to-brand-400 flex items-center justify-center relative">
                 <div className="absolute inset-0 flex items-center justify-center">
                   <div className="text-center text-white">
-                    <div className="w-24 h-24 mx-auto mb-4 bg-white/15 border-2 border-white/30 rounded-full flex items-center justify-center animate-float">
-                      <Droplets className="w-12 h-12 text-white" />
+                    <div className="w-28 h-28 mx-auto mb-4 bg-white rounded-2xl flex items-center justify-center animate-float shadow-2xl p-2">
+                      <img src={logo} alt="Kumar Pure Water Logo" className="w-full h-full object-contain" />
                     </div>
                     <p className="text-xl font-bold text-white leading-snug">Kumar Pure Water<br/>Pvt. Ltd.</p>
                     <p className="text-white/70 text-sm mt-1">Est. 1999 · Agra, U.P.</p>
