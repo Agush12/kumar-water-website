@@ -10,9 +10,13 @@ const contactInfo = [
   {
     icon: MapPin,
     title: 'Our Address',
-    lines: ['109/1, Karkunj Rd, Sector 15-B,', 'Avas Vikas Colony, Sikandra,', 'Agra, Uttar Pradesh – 282007'],
+    lines: [
+      '109/1, Sector 15-B, Kar Kunj Chauraha,',
+      'Awas Vikas Colony, Sikandra,',
+      'Agra, Uttar Pradesh 282007',
+    ],
     color: '#2563EB',
-    href: 'https://maps.google.com/?q=Kumar+Pure+Water+Solution+Pvt+Ltd,+109/1,+Karkunj+Rd,+Sector+15-B,+Kar+Kunj+Chauraha,+Avas+Vikas+Colony,+Sikandra,+Agra,+Uttar+Pradesh+282007',
+    href: 'https://maps.google.com/?q=Kumar+Pure+Water+Solution+Pvt+Ltd,+109/1,+Sector+15-B,+Kar+Kunj+Chauraha,+Awas+Vikas+Colony,+Sikandra,+Agra,+Uttar+Pradesh+282007',
   },
   {
     icon: Phone,

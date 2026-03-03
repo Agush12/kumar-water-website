@@ -127,9 +127,9 @@ const products = [
     id: 'wtp-plant',
     image: wtpPlantImg,
     title: 'WTP Plant',
-    subtitle: 'Water Treatment Plant',
+    subtitle: 'Waste Treatment Plant',
     description:
-      'Comprehensive water treatment plants for bore water, river water and surface water purification for municipalities and industries.',
+      'Comprehensive waste treatment plants for bore water, river water and surface water purification for municipalities and industries.',
     features: [
       'Multi-media filtration',
       'Activated carbon filter',

@@ -14,6 +14,7 @@ import transportBg from '../assets/transport-bg.png';
 import mediaBg from '../assets/media-bg.png';
 import industriesBg from '../assets/industries-bg.png';
 import specialForcesBg from '../assets/special-forces-bg.png';
+import residentialCommunityBg from 'C:/Users/Lenovo/.cursor/projects/c-Users-Lenovo-Desktop-ankur/assets/c__Users_Lenovo_AppData_Roaming_Cursor_User_workspaceStorage_5f61d0a1178a2f47ba56f92530b4cf4d_images_ChatGPT_Image_Mar_3__2026__04_05_12_PM-dc2110c4-c7f7-4090-bc20-6b9b0988d78b.png';
 
 const sectors = [
   {
@@ -42,6 +43,19 @@ const sectors = [
     ],
     color: '#0F172A',
     bgImage: defenceBg,
+  },
+  {
+    icon: Hotel,
+    title: 'Residential & Societies',
+    badge: 'COMMUNITY',
+    clients: [
+      'Gated Communities',
+      'Residential Societies',
+      'RWAs & Apartments',
+      'Townships & Colonies',
+    ],
+    color: '#14B8A6',
+    bgImage: residentialCommunityBg,
   },
   {
     icon: Stethoscope,
@@ -137,28 +151,32 @@ const sectors = [
 ];
 
 const notableInstallations = [
-  { label: 'U.P. Police & PAC',        category: 'Govt.' },
-  { label: 'Uttarakhand Police',        category: 'Govt.' },
-  { label: 'Indian Air Force',          category: 'Defence' },
-  { label: 'Indian Army',               category: 'Defence' },
-  { label: 'Indian Special Forces',     category: 'Defence' },
-  { label: 'ITBP / NDRF / SSB',         category: 'Defence' },
-  { label: 'Amar Ujala Group',          category: 'Media' },
-  { label: 'MNCs',                      category: 'Corporate' },
-  { label: 'UPSRTC Units',              category: 'Transport' },
-  { label: 'Universities',              category: 'Education' },
-  { label: 'Multi-specialty Hospitals', category: 'Medical' },
-  { label: 'Dialysis Plants',           category: 'Medical' },
+  { label: 'U.P. Police & PAC',              category: 'Govt.' },
+  { label: 'Uttarakhand Police',             category: 'Govt.' },
+  { label: 'Indian Air Force',               category: 'Defence' },
+  { label: 'Indian Army',                    category: 'Defence' },
+  { label: 'Indian Special Forces',          category: 'Defence' },
+  { label: 'ITBP / NDRF / SSB',              category: 'Defence' },
+  { label: 'Amar Ujala Group',               category: 'Media' },
+  { label: 'MNCs',                           category: 'Corporate' },
+  { label: 'UPSRTC Units',                   category: 'Transport' },
+  { label: 'Universities',                   category: 'Education' },
+  { label: 'Multi-specialty Hospitals',      category: 'Medical' },
+  { label: 'Dialysis Plants',                category: 'Medical' },
+  { label: 'Civil Infrastructure Projects',  category: 'Civic' },
+  { label: 'Residential Societies & RWAs',   category: 'Community' },
 ];
 
 const categoryColors = {
-  'Govt.':     { bg: 'bg-blue-50',   border: 'border-blue-200',   text: 'text-blue-700',   dot: 'bg-blue-500'   },
-  'Defence':   { bg: 'bg-slate-50',  border: 'border-slate-300',  text: 'text-slate-700',  dot: 'bg-slate-500'  },
-  'Media':     { bg: 'bg-green-50',  border: 'border-green-200',  text: 'text-green-700',  dot: 'bg-green-500'  },
-  'Corporate': { bg: 'bg-emerald-50',border: 'border-emerald-200',text: 'text-emerald-700',dot: 'bg-emerald-500'},
-  'Transport': { bg: 'bg-red-50',    border: 'border-red-200',    text: 'text-red-700',    dot: 'bg-red-500'    },
-  'Education': { bg: 'bg-purple-50', border: 'border-purple-200', text: 'text-purple-700', dot: 'bg-purple-500' },
-  'Medical':   { bg: 'bg-cyan-50',   border: 'border-cyan-200',   text: 'text-cyan-700',   dot: 'bg-cyan-500'   },
+  'Govt.':     { bg: 'bg-blue-50',    border: 'border-blue-200',    text: 'text-blue-700',    dot: 'bg-blue-500'    },
+  'Defence':   { bg: 'bg-slate-50',   border: 'border-slate-300',   text: 'text-slate-700',   dot: 'bg-slate-500'   },
+  'Media':     { bg: 'bg-green-50',   border: 'border-green-200',   text: 'text-green-700',   dot: 'bg-green-500'   },
+  'Corporate': { bg: 'bg-emerald-50', border: 'border-emerald-200', text: 'text-emerald-700', dot: 'bg-emerald-500' },
+  'Transport': { bg: 'bg-red-50',     border: 'border-red-200',     text: 'text-red-700',     dot: 'bg-red-500'     },
+  'Education': { bg: 'bg-purple-50',  border: 'border-purple-200',  text: 'text-purple-700',  dot: 'bg-purple-500'  },
+  'Medical':   { bg: 'bg-cyan-50',    border: 'border-cyan-200',    text: 'text-cyan-700',    dot: 'bg-cyan-500'    },
+  'Civic':     { bg: 'bg-orange-50',  border: 'border-orange-200',  text: 'text-orange-700',  dot: 'bg-orange-500'  },
+  'Community': { bg: 'bg-teal-50',    border: 'border-teal-200',    text: 'text-teal-700',    dot: 'bg-teal-500'    },
 };
 
 function SectorCard({ icon: Icon, title, badge, clients, color, index, inView, bgImage }) {
@@ -300,7 +318,6 @@ export default function Experience() {
           <div className="flex items-center gap-3 px-6 sm:px-8 py-4 border-b border-brand-50 bg-brand-50/50">
             <div className="w-2 h-6 rounded-full bg-gradient-to-b from-brand-600 to-brand-400" />
             <h3 className="text-brand-950 font-bold text-base sm:text-lg">Notable Installations</h3>
-            <span className="ml-auto text-xs text-slate-400 font-medium">{notableInstallations.length} Projects</span>
           </div>
 
           {/* Tags */}

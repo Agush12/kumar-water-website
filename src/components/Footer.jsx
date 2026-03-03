@@ -17,7 +17,7 @@ const services = [
   'Industrial RO Plants',
   'Sewage Treatment (STP)',
   'Effluent Treatment (ETP)',
-  'Water Treatment (WTP)',
+  'Waste Treatment (WTP)',
   'Swimming Pool Systems',
   'Hydraulic & Fountains',
   'AMC & After-Sales Service',
@@ -59,7 +59,7 @@ export default function Footer() {
               </a>
               <div className="flex items-start gap-2.5 text-slate-400">
                 <MapPin className="w-4 h-4 text-brand-400 flex-shrink-0 mt-0.5" />
-                <span>109/1, Sector 15B, Awas Vikas Colony, Near Karkunj, Agra</span>
+                <span>109/1, Sector 15-B, Kar Kunj Chauraha, Awas Vikas Colony, Sikandra, Agra, Uttar Pradesh 282007</span>
               </div>
             </div>
           </div>
@@ -107,12 +107,6 @@ export default function Footer() {
               className="block w-full py-3 bg-green-500/15 border border-green-500/30 text-green-400 text-sm font-bold rounded-xl text-center hover:bg-green-500/25 transition-colors duration-300">
               WhatsApp Us
             </a>
-
-            <div className="mt-5 p-4 bg-white/5 border border-white/10 rounded-xl">
-              <p className="text-white/70 text-xs font-bold uppercase tracking-wide mb-2">Business Hours</p>
-              <p className="text-slate-400 text-xs">Mon – Sat: 9:00 AM – 7:00 PM</p>
-              <p className="text-slate-400 text-xs">Sun: 10:00 AM – 2:00 PM</p>
-            </div>
           </div>
         </div>
 

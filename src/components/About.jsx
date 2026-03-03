@@ -15,7 +15,7 @@ const expertiseList = [
   'RO Plants (50 LPH – 50,000 LPH)',
   'Sewage Treatment Plants (STP)',
   'Effluent Treatment Plants (ETP)',
-  'Water Treatment Plants (WTP)',
+  'Waste Treatment Plants (WTP)',
   'Swimming Pool Systems',
   'Hydraulic & Fountain Systems',
 ];

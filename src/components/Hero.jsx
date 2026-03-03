@@ -7,7 +7,7 @@ import heroBg from '../assets/hero-bg.png';
 const badges = [
   { icon: Award, label: 'Since 1999' },
   { icon: Shield, label: 'Govt. Certified' },
-  { icon: Zap, label: '50,000 LPH' },
+  { icon: Zap, label: '50 – 50,000 LPH' },
 ];
 
 const bubbleData = [
