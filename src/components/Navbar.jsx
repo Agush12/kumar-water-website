@@ -6,8 +6,8 @@ import logo from '../assets/logo.png';
 const navLinks = [
   { label: 'Home', to: 'hero' },
   { label: 'About', to: 'about' },
-  { label: 'Experience', to: 'experience' },
   { label: 'Products', to: 'products' },
+  { label: 'Experience', to: 'experience' },
   { label: 'Usage', to: 'usage' },
   { label: 'Coverage', to: 'coverage' },
   { label: 'Contact', to: 'contact' },
@@ -110,7 +110,7 @@ export default function Navbar() {
           menuOpen ? 'max-h-screen opacity-100' : 'max-h-0 opacity-0'
         }`}
       >
-        <div className="bg-white/98 backdrop-blur-md px-4 pb-4 pt-2 space-y-1 border-t border-brand-100/50 shadow-xl">
+        <div className="bg-white/85 backdrop-blur-2xl px-4 pb-4 pt-2 space-y-1 border-t border-white/40 shadow-2xl">
           {navLinks.map((link) => (
             <Link
               key={link.to}
@@ -118,7 +118,7 @@ export default function Navbar() {
               smooth
               duration={600}
               onClick={() => setMenuOpen(false)}
-              className="block px-4 py-3 text-slate-600 hover:text-brand-600 hover:bg-brand-50 rounded-lg font-medium transition-all duration-300 cursor-pointer"
+              className="block px-4 py-3 rounded-lg font-extrabold transition-all duration-300 cursor-pointer hover:bg-white/70" style={{ color: "#0f172a" }}
             >
               {link.label}
             </Link>
@@ -137,3 +137,5 @@ export default function Navbar() {
     </nav>
   );
 }
+
+

@@ -5,6 +5,15 @@ import {
   Hotel, Factory, Newspaper, ChevronLeft, ChevronRight, Siren,
 } from 'lucide-react';
 import logo from '../assets/logo.png';
+import govtBg from '../assets/govt-agencies-bg.png';
+import defenceBg from '../assets/defence-bg.png';
+import medicalBg from '../assets/medical-bg.png';
+import educationBg from '../assets/education-bg.png';
+import hospitalityBg from '../assets/hospitality-bg.png';
+import transportBg from '../assets/transport-bg.png';
+import mediaBg from '../assets/media-bg.png';
+import industriesBg from '../assets/industries-bg.png';
+import specialForcesBg from '../assets/special-forces-bg.png';
 
 const sectors = [
   {
@@ -18,6 +27,7 @@ const sectors = [
       'Nagar Nigam',
     ],
     color: '#2563EB',
+    bgImage: govtBg,
   },
   {
     icon: Shield,
@@ -31,6 +41,7 @@ const sectors = [
       'SSB',
     ],
     color: '#0F172A',
+    bgImage: defenceBg,
   },
   {
     icon: Stethoscope,
@@ -43,6 +54,7 @@ const sectors = [
       'Clinics & Blood Banks',
     ],
     color: '#06B6D4',
+    bgImage: medicalBg,
   },
   {
     icon: GraduationCap,
@@ -55,6 +67,7 @@ const sectors = [
       'Hostels & Canteens',
     ],
     color: '#8B5CF6',
+    bgImage: educationBg,
   },
   {
     icon: Hotel,
@@ -67,6 +80,7 @@ const sectors = [
       'Guest Houses',
     ],
     color: '#F59E0B',
+    bgImage: hospitalityBg,
   },
   {
     icon: Train,
@@ -79,6 +93,7 @@ const sectors = [
       'Transit Hubs',
     ],
     color: '#EF4444',
+    bgImage: transportBg,
   },
   {
     icon: Newspaper,
@@ -91,6 +106,7 @@ const sectors = [
       'Corporate Campuses',
     ],
     color: '#10B981',
+    bgImage: mediaBg,
   },
   {
     icon: Factory,
@@ -103,6 +119,7 @@ const sectors = [
       'Chemical Plants',
     ],
     color: '#F97316',
+    bgImage: industriesBg,
   },
   {
     icon: Siren,
@@ -115,6 +132,7 @@ const sectors = [
       'Central Armed Forces',
     ],
     color: '#64748B',
+    bgImage: specialForcesBg,
   },
 ];
 
@@ -143,12 +161,12 @@ const categoryColors = {
   'Medical':   { bg: 'bg-cyan-50',   border: 'border-cyan-200',   text: 'text-cyan-700',   dot: 'bg-cyan-500'   },
 };
 
-function SectorCard({ icon: Icon, title, badge, clients, color, index, inView }) {
+function SectorCard({ icon: Icon, title, badge, clients, color, index, inView, bgImage }) {
   return (
     <div
-      className={`flex-shrink-0 w-60 sm:w-68 rounded-2xl bg-white border border-gray-100 shadow-md transition-all duration-500 hover:-translate-y-2 hover:shadow-xl cursor-default group overflow-hidden ${
+      className={`flex-shrink-0 w-60 sm:w-68 rounded-2xl border border-gray-100 shadow-md transition-all duration-500 hover:-translate-y-2 hover:shadow-xl cursor-default group overflow-hidden relative ${
         inView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
-      }`}
+      } ${bgImage ? '' : 'bg-white'}`}
       style={{ transitionDelay: `${index * 80}ms`, width: '17rem' }}
       onMouseEnter={(e) => {
         e.currentTarget.style.borderColor = color;
@@ -159,31 +177,56 @@ function SectorCard({ icon: Icon, title, badge, clients, color, index, inView })
         e.currentTarget.style.boxShadow = '';
       }}
     >
-      {/* Colored top strip */}
-      <div className="h-1 w-full" style={{ background: `linear-gradient(90deg, ${color}, ${color}60)` }} />
+      {/* Background image */}
+      {bgImage && (
+        <>
+          <img
+            src={bgImage}
+            alt=""
+            className="absolute inset-0 w-full h-full object-cover object-center"
+          />
+          <div className="absolute inset-0 bg-gradient-to-b from-black/55 via-black/40 to-black/80" />
+        </>
+      )}
 
-      <div className="p-5 sm:p-6">
+      {/* Colored top strip */}
+      <div className="h-1 w-full relative z-10" style={{ background: `linear-gradient(90deg, ${color}, ${color}60)` }} />
+
+      <div className="p-5 sm:p-6 relative z-10">
         <div className="flex items-center justify-between mb-4">
           <div
             className="w-11 h-11 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300"
-            style={{ background: `${color}12`, border: `1.5px solid ${color}30` }}
+            style={bgImage
+              ? { background: 'rgba(255,255,255,0.18)', border: `1.5px solid rgba(255,255,255,0.35)` }
+              : { background: `${color}12`, border: `1.5px solid ${color}30` }}
           >
-            <Icon className="w-5 h-5" style={{ color }} />
+            <Icon className="w-5 h-5" style={{ color: bgImage ? '#fff' : color }} />
           </div>
           <span
             className="text-[0.6rem] font-bold tracking-widest px-2 py-0.5 rounded-full"
-            style={{ background: `${color}12`, color }}
+            style={bgImage
+              ? { background: 'rgba(0,0,0,0.45)', color: '#fff', textShadow: '0 1px 3px rgba(0,0,0,0.8)' }
+              : { background: `${color}12`, color }}
           >
             {badge}
           </span>
         </div>
 
-        <h3 className="text-brand-950 font-bold text-sm sm:text-base mb-3 leading-tight">{title}</h3>
+        <h3
+          className={`font-extrabold text-sm sm:text-base mb-3 leading-tight ${bgImage ? 'text-white' : 'text-brand-950'}`}
+          style={bgImage ? { textShadow: '0 1px 6px rgba(0,0,0,0.9)' } : {}}
+        >
+          {title}
+        </h3>
 
         <ul className="space-y-2">
           {clients.map((c) => (
-            <li key={c} className="flex items-center gap-2 text-slate-500 text-xs sm:text-sm">
-              <span className="w-1.5 h-1.5 rounded-full flex-shrink-0" style={{ background: color }} />
+            <li
+              key={c}
+              className={`flex items-center gap-2 text-xs sm:text-sm font-semibold ${bgImage ? 'text-white/95' : 'text-slate-500'}`}
+              style={bgImage ? { textShadow: '0 1px 4px rgba(0,0,0,0.85)' } : {}}
+            >
+              <span className="w-1.5 h-1.5 rounded-full flex-shrink-0" style={{ background: bgImage ? '#fff' : color }} />
               {c}
             </li>
           ))}
@@ -242,7 +285,7 @@ export default function Experience() {
 
           <div ref={scrollRef} className="flex gap-4 sm:gap-5 overflow-x-auto pb-4 hide-scrollbar px-1">
             {sectors.map((sector, i) => (
-              <SectorCard key={sector.title} {...sector} index={i} inView={inView} />
+              <SectorCard key={sector.title} {...sector} index={i} inView={inView} bgImage={sector.bgImage} />
             ))}
           </div>
         </div>

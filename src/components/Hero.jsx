@@ -86,16 +86,19 @@ export default function Hero() {
 
       {/* Main Content */}
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center pt-24 pb-16">
-        {/* Tag */}
+        {/* Tag — Company name with logo */}
         <div
-          className={`inline-flex items-center gap-2.5 px-4 py-2 bg-white/15 border border-white/30 rounded-full text-white text-xs sm:text-sm font-medium mb-6 md:mb-8 backdrop-blur-sm transition-all duration-700 ${
+          className={`inline-flex items-center gap-3 px-5 py-2.5 bg-white/20 border-2 border-white/40 rounded-full text-white text-sm sm:text-base font-bold mb-6 md:mb-8 backdrop-blur-sm transition-all duration-700 shadow-lg ${
             loaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
           }`}
+          style={{ textShadow: '0 1px 8px rgba(0,0,0,0.3)' }}
         >
-          <div className="w-6 h-6 bg-white rounded-full flex items-center justify-center p-0.5 flex-shrink-0">
-            <img src={logo} alt="KPWS Logo" className="w-full h-full object-contain" />
+          <div className="w-8 h-8 bg-white rounded-full flex items-center justify-center p-1 flex-shrink-0 shadow-md">
+            <img src={logo} alt="Kumar Pure Water" className="w-full h-full object-contain" />
           </div>
-          Northern India&apos;s Trusted Water Treatment Company
+          <span className="bg-gradient-to-r from-white to-white/90 bg-clip-text text-transparent">
+            Kumar Pure Water Solution Pvt. Ltd.
+          </span>
         </div>
 
         {/* Main Heading */}

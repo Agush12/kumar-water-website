@@ -101,7 +101,7 @@ export default function Footer() {
             </p>
             <Link to="contact" smooth duration={600}
               className="block w-full py-3 bg-gradient-to-r from-brand-600 to-brand-500 text-white text-sm font-bold rounded-xl text-center cursor-pointer hover:shadow-lg hover:shadow-brand-500/30 hover:-translate-y-0.5 transition-all duration-300 mb-3">
-              Request Free Quote
+              Request Quote
             </Link>
             <a href="https://wa.me/919837032425" target="_blank" rel="noopener noreferrer"
               className="block w-full py-3 bg-green-500/15 border border-green-500/30 text-green-400 text-sm font-bold rounded-xl text-center hover:bg-green-500/25 transition-colors duration-300">
