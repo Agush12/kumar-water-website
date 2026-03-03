@@ -14,7 +14,7 @@ import transportBg from '../assets/transport-bg.png';
 import mediaBg from '../assets/media-bg.png';
 import industriesBg from '../assets/industries-bg.png';
 import specialForcesBg from '../assets/special-forces-bg.png';
-import residentialCommunityBg from 'C:/Users/Lenovo/.cursor/projects/c-Users-Lenovo-Desktop-ankur/assets/c__Users_Lenovo_AppData_Roaming_Cursor_User_workspaceStorage_5f61d0a1178a2f47ba56f92530b4cf4d_images_ChatGPT_Image_Mar_3__2026__04_05_12_PM-dc2110c4-c7f7-4090-bc20-6b9b0988d78b.png';
+import residentialCommunityBg from '../assets/residential-community-bg.png';
 
 const sectors = [
   {
