@@ -136,7 +136,7 @@ const products = [
       'Chemical dosing system',
       'UV & chlorination unit',
       'Meets BIS 10500 standards',
-      'Capacity up to 1,00,000 LPH',
+      'Capacity up to 50,000 LPH',
     ],
     color: '#0284C7',
     bgGradient: 'from-sky-500/10 to-sky-400/5',
@@ -289,7 +289,7 @@ export default function Products() {
             <span className="text-gradient">Solutions</span>
           </h2>
           <p className="section-subtitle max-w-2xl mx-auto">
-            From 50 LPH home systems to 1,00,000 LPH industrial plants — engineered for
+            From 50 LPH home systems to 50,000 LPH industrial plants — engineered for
             performance, reliability and long-term value.
           </p>
         </div>
